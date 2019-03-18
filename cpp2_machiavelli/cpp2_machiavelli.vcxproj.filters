@@ -13,28 +13,34 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Server Files">
+      <UniqueIdentifier>{90611057-06b1-4dea-8e6f-a9a631f317af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Server Files">
+      <UniqueIdentifier>{75a1842c-e0af-439c-93bf-ab22d626b48d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CircularBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CircularBuffer.h">
+      <Filter>Header Files\Server Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientCommand.h">
+      <Filter>Header Files\Server Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientInfo.h">
+      <Filter>Header Files\Server Files</Filter>
+    </ClInclude>
     <ClInclude Include="Socket.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Server Files</Filter>
     </ClInclude>
     <ClInclude Include="Sync_queue.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Server Files</Filter>
     </ClInclude>
     <ClInclude Include="throw.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Server Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -45,10 +51,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Socket.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Server Files</Filter>
     </ClCompile>
     <ClCompile Include="throw.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Server Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
