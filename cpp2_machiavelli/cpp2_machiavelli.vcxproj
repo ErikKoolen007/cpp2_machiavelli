@@ -115,6 +115,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Downloads\machiavelli\CircularBuffer.h" />
+    <ClInclude Include="..\..\..\..\Downloads\machiavelli\ClientCommand.h" />
+    <ClInclude Include="..\..\..\..\Downloads\machiavelli\ClientInfo.h" />
+    <ClInclude Include="..\..\..\..\Downloads\machiavelli\Player.h" />
+    <ClInclude Include="..\..\..\..\Downloads\machiavelli\Socket.h" />
+    <ClInclude Include="..\..\..\..\Downloads\machiavelli\Sync_queue.h" />
+    <ClInclude Include="..\..\..\..\Downloads\machiavelli\throw.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Downloads\machiavelli\main.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\machiavelli\Player.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\machiavelli\Socket.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\machiavelli\throw.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
