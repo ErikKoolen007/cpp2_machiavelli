@@ -6,6 +6,6 @@ class EndState :
 	public GameState
 {
 public:
-	SetupState next;
+	//SetupState next;
 };
 

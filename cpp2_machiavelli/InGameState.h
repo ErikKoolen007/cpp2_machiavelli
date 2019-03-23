@@ -10,6 +10,6 @@ public:
 	Turn setupFirstTurn();
 private:
 	std::deque<Turn> turns;
-	EndState next;
+	//EndState next;
 };
 

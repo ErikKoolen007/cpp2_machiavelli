@@ -13,6 +13,7 @@
 #include <memory>
 #include <utility>
 #include <chrono>
+#include "Game.h"
 using namespace std;
 
 #include "Socket.h"
@@ -73,8 +74,10 @@ std::shared_ptr<ClientInfo> init_client_session(Socket client) {
     return make_shared<ClientInfo>(move(client), Player { name });
 }
 
-void handle_client(Socket client) // this function runs in a separate thread
+void handle_client(Socket client, std::unique_ptr<Game> game) // this function runs in a separate thread
 {
+
+	//move to game
     try {
         auto client_info = init_client_session(move(client));
         auto &socket = client_info->get_socket();
@@ -87,11 +90,14 @@ void handle_client(Socket client) // this function runs in a separate thread
                 std::string cmd;
                 if (socket.readline([&cmd](std::string input) { cmd=input; })) {
                     cerr << '[' << socket.get_dotted_ip() << " (" << socket.get_socket() << ") " << player.get_name() << "] " << cmd << "\r\n";
+					//initialize clientinputhandler
 
+					//move
                     if (cmd == "quit") {
                         socket.write("Bye!\r\n");
                         break; // out of game loop, will end this thread and close connection
                     }
+					//move
                     else if (cmd == "quit_server") {
                         running = false;
                     }
@@ -106,7 +112,6 @@ void handle_client(Socket client) // this function runs in a separate thread
                 socket.write("ERROR: something went wrong during handling of your request. Sorry!\r\n");
             }
         }
-        // close weg
     } 
     catch(std::exception &ex) {
         cerr << "handle_client " << ex.what() << "\n";
@@ -125,13 +130,16 @@ int main(int argc, const char * argv[])
     // create a server socket
     ServerSocket server {machiavelli::tcp_port};
 
+	//create the game
+	std::unique_ptr<Game> game = std::make_unique<Game>();
+
     try {
         cerr << "server listening" << '\n';
         while (running) {
             // wait for connection from client; will create new socket
-            server.accept([&all_threads](Socket client) {
+            server.accept([&all_threads](Socket client, unique_ptr<Game> game) {
                 std::cerr << "Connection accepted from " << client.get_dotted_ip() << "\n";
-                all_threads.emplace_back(handle_client, move(client));
+                all_threads.emplace_back(handle_client, move(client), game);
             });
             this_thread::sleep_for(chrono::milliseconds(100));
         }

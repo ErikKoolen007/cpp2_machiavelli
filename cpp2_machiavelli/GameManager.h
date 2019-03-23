@@ -1,10 +1,10 @@
 #pragma once
-#include "PlayerInputHandler.h"
+#include "ClientInputHandler.h"
 
 class GameManager
 {
 public:
 private:
-	PlayerInputHandler handler;
+	ClientInputHandler handler;
 };
 

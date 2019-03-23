@@ -1,5 +1,5 @@
 #pragma once
-class PlayerInputHandler
+class ClientInputHandler
 {
 public:
 	void handleInput();
