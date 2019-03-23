@@ -8,7 +8,7 @@ class SetupState :
 {
 public:
 private:
-	InGameState next;
+	//InGameState next;
 	FileReader fileReader;
 };
 

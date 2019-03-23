@@ -77,6 +77,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -115,19 +118,45 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BuildingCard.h" />
+    <ClInclude Include="CharacterCard.h" />
     <ClInclude Include="CircularBuffer.h" />
     <ClInclude Include="ClientCommand.h" />
     <ClInclude Include="ClientInfo.h" />
+    <ClInclude Include="EndState.h" />
+    <ClInclude Include="FileReader.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="InGameState.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerInputHandler.h" />
+    <ClInclude Include="SetupState.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="Sync_queue.h" />
     <ClInclude Include="throw.h" />
+    <ClInclude Include="Turn.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BuildingCard.cpp" />
+    <ClCompile Include="CharacterCard.cpp" />
+    <ClCompile Include="EndState.cpp" />
+    <ClCompile Include="FileReader.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="InGameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerInputHandler.cpp" />
+    <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="throw.cpp" />
+    <ClCompile Include="Turn.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Bouwkaarten.csv" />
+    <None Include="karakterkaarten.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
