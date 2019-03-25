@@ -9,6 +9,5 @@ public:
 private:
 	std::deque<BuildingCard> buildingCards;
 	std::deque<CharacterCard> characterCard;
-
 };
 

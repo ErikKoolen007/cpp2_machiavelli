@@ -14,6 +14,7 @@
 #include <utility>
 #include <chrono>
 #include "Game.h"
+#include "SetupState.h"
 using namespace std;
 
 #include "Socket.h"
@@ -74,7 +75,7 @@ std::shared_ptr<ClientInfo> init_client_session(Socket client) {
     return make_shared<ClientInfo>(move(client), Player { name });
 }
 
-void handle_client(Socket client, std::unique_ptr<Game> game) // this function runs in a separate thread
+void handle_client(Socket client) // this function runs in a separate thread
 {
 
 	//move to game
@@ -90,7 +91,6 @@ void handle_client(Socket client, std::unique_ptr<Game> game) // this function r
                 std::string cmd;
                 if (socket.readline([&cmd](std::string input) { cmd=input; })) {
                     cerr << '[' << socket.get_dotted_ip() << " (" << socket.get_socket() << ") " << player.get_name() << "] " << cmd << "\r\n";
-					//initialize clientinputhandler
 
 					//move
                     if (cmd == "quit") {
@@ -131,15 +131,17 @@ int main(int argc, const char * argv[])
     ServerSocket server {machiavelli::tcp_port};
 
 	//create the game
-	std::unique_ptr<Game> game = std::make_unique<Game>();
+	std::unique_ptr<GameManager> manager = std::make_unique<GameManager>(all_threads);
+	std::unique_ptr<SetupState> state = std::make_unique<SetupState>(*manager);
+	std::unique_ptr<Game> game = std::make_unique<Game>(all_threads, std::move(manager), std::move(state));
 
     try {
         cerr << "server listening" << '\n';
         while (running) {
             // wait for connection from client; will create new socket
-            server.accept([&all_threads](Socket client, unique_ptr<Game> game) {
+            server.accept([&all_threads](Socket client) {
                 std::cerr << "Connection accepted from " << client.get_dotted_ip() << "\n";
-                all_threads.emplace_back(handle_client, move(client), game);
+                all_threads.emplace_back(handle_client, move(client));
             });
             this_thread::sleep_for(chrono::milliseconds(100));
         }

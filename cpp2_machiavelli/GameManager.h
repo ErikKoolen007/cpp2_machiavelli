@@ -4,7 +4,11 @@
 class GameManager
 {
 public:
+	GameManager(std::vector<std::thread>& clients)
+	{
+		handler = std::make_unique<ClientInputHandler>(clients);
+	}
 private:
-	ClientInputHandler handler;
+	std::unique_ptr<ClientInputHandler> handler;
 };
 

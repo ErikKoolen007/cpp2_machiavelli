@@ -5,7 +5,9 @@
 class GameState
 {
 public:
+	GameState(GameManager& manager) : manager(manager) {}
+	virtual void next() = 0;
 protected:
-	GameManager manager;
+	GameManager& manager;
 };
 

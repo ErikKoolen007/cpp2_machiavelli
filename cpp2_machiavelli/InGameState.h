@@ -8,8 +8,9 @@ class InGameState :	public GameState
 {
 public:
 	Turn setupFirstTurn();
+	void next() override;
 private:
-	std::deque<Turn> turns;
-	//EndState next;
+	//std::deque<Turn> turns;
+	//EndState nextState;
 };
 

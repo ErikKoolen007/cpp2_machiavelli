@@ -2,10 +2,11 @@
 #include "GameState.h"
 #include "SetupState.h"
 
-class EndState :
-	public GameState
+class EndState : public GameState
 {
 public:
-	//SetupState next;
+	void next() override;
+private:
+	//SetupState nextState;
 };
 
