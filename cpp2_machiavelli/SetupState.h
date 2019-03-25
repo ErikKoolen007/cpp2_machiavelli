@@ -7,8 +7,10 @@ class SetupState :
 	public GameState
 {
 public:
+	SetupState(GameManager& manager) : GameState(manager) {}
+	void next() override;
 private:
-	InGameState next;
-	FileReader fileReader;
+	//InGameState nextState;
+	//FileReader fileReader;
 };
 

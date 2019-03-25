@@ -13,6 +13,8 @@
 #include <memory>
 #include <utility>
 #include <chrono>
+#include "Game.h"
+#include "SetupState.h"
 using namespace std;
 
 #include "Socket.h"
@@ -75,6 +77,8 @@ std::shared_ptr<ClientInfo> init_client_session(Socket client) {
 
 void handle_client(Socket client) // this function runs in a separate thread
 {
+
+	//move to game
     try {
         auto client_info = init_client_session(move(client));
         auto &socket = client_info->get_socket();
@@ -88,10 +92,12 @@ void handle_client(Socket client) // this function runs in a separate thread
                 if (socket.readline([&cmd](std::string input) { cmd=input; })) {
                     cerr << '[' << socket.get_dotted_ip() << " (" << socket.get_socket() << ") " << player.get_name() << "] " << cmd << "\r\n";
 
+					//move
                     if (cmd == "quit") {
                         socket.write("Bye!\r\n");
                         break; // out of game loop, will end this thread and close connection
                     }
+					//move
                     else if (cmd == "quit_server") {
                         running = false;
                     }
@@ -106,7 +112,6 @@ void handle_client(Socket client) // this function runs in a separate thread
                 socket.write("ERROR: something went wrong during handling of your request. Sorry!\r\n");
             }
         }
-        // close weg
     } 
     catch(std::exception &ex) {
         cerr << "handle_client " << ex.what() << "\n";
@@ -124,6 +129,11 @@ int main(int argc, const char * argv[])
 
     // create a server socket
     ServerSocket server {machiavelli::tcp_port};
+
+	//create the game
+	std::unique_ptr<GameManager> manager = std::make_unique<GameManager>(all_threads);
+	std::unique_ptr<SetupState> state = std::make_unique<SetupState>(*manager);
+	std::unique_ptr<Game> game = std::make_unique<Game>(all_threads, std::move(manager), std::move(state));
 
     try {
         cerr << "server listening" << '\n';

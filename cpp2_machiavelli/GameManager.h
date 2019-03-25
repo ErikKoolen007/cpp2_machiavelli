@@ -1,10 +1,14 @@
 #pragma once
-#include "PlayerInputHandler.h"
+#include "ClientInputHandler.h"
 
 class GameManager
 {
 public:
+	GameManager(std::vector<std::thread>& clients)
+	{
+		handler = std::make_unique<ClientInputHandler>(clients);
+	}
 private:
-	PlayerInputHandler handler;
+	std::unique_ptr<ClientInputHandler> handler;
 };
 
