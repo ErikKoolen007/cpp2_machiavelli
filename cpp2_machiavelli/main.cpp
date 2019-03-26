@@ -24,6 +24,7 @@
 #include "Player.h"
 #include "ClientInfo.h"
 #include "FileReader.h"
+#include "Game.h"
 
 namespace machiavelli {
     const int tcp_port {1080};
@@ -148,24 +149,22 @@ int main(int argc, const char * argv[])
 		ServerSocket server{ machiavelli::tcp_port };
 
 	//create the game
-	std::unique_ptr<GameManager> manager = std::make_unique<GameManager>(all_threads);
-	std::unique_ptr<SetupState> state = std::make_unique<SetupState>(*manager);
-	std::unique_ptr<Game> game = std::make_unique<Game>(all_threads, std::move(manager), std::move(state));
+	std::unique_ptr<Game> game = std::make_unique<Game>(all_threads);
 
     try {
-        cerr << "server listening" << '\n';
+	    std::cerr << "server listening" << '\n';
         while (running) {
             // wait for connection from client; will create new socket
             server.accept([&all_threads](Socket client) {
                 std::cerr << "Connection accepted from " << client.get_dotted_ip() << "\n";
-                all_threads.emplace_back(handle_client, move(client));
+                all_threads.emplace_back(handle_client, std::move(client));
             });
-            this_thread::sleep_for(chrono::milliseconds(100));
+	        std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
-    } catch (const exception& ex) {
-        cerr << ex.what() << ", resuming..." << '\n';
+    } catch (const std::exception& ex) {
+	    std::cerr << ex.what() << ", resuming..." << '\n';
     } catch (...) {
-        cerr << "problems, problems, but: keep calm and carry on!\n";
+	    std::cerr << "problems, problems, but: keep calm and carry on!\n";
     }
 
 		for (auto &t : all_threads) {
