@@ -6,6 +6,7 @@ class EndState : public GameState
 {
 public:
 	void next() override;
+	void setup() override;
 private:
 	//SetupState nextState;
 };

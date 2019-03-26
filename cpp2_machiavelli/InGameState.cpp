@@ -3,3 +3,7 @@
 void InGameState::next()
 {
 }
+
+void InGameState::setup()
+{
+}

@@ -20,3 +20,9 @@ void FileReader::load_building_cards()
 		std::cerr << "Unable to open file\n";
 	}
 }
+
+std::deque<BuildingCard>& FileReader::getBuildingCards()
+{
+	return this->buildingCards;
+}
+

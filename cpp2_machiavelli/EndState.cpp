@@ -3,3 +3,7 @@
 void EndState::next()
 {
 }
+
+void EndState::setup()
+{
+}
