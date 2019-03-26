@@ -1,6 +1,5 @@
 #pragma once
 #include "GameState.h"
-#include "InGameState.h"
 #include "FileReader.h"
 
 class SetupState :
@@ -17,3 +16,12 @@ private:
 	std::unique_ptr<FileReader> fileReader;
 };
 
+//random shuffle
+template <class RandomAccessIterator, class URNG>
+void shuffle(RandomAccessIterator first, RandomAccessIterator last, URNG&& g)
+{
+	for (auto i = (last - first) - 1; i > 0; --i) {
+		std::uniform_int_distribution<decltype(i)> d(0, i);
+		swap(first[i], first[d(g)]);
+	}
+}
