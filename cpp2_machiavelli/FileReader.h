@@ -6,8 +6,12 @@
 class FileReader
 {
 public:
+	FileReader() = default;
+
+	void load_building_cards();
 private:
 	std::deque<BuildingCard> buildingCards;
-	std::deque<CharacterCard> characterCard;
+	std::deque<CharacterCard> characterCards;
+
 };
 

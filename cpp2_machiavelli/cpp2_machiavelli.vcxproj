@@ -77,6 +77,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -127,7 +130,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="InGameState.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="ClientInputHandler.h" />
+    <ClInclude Include="PlayerInputHandler.h" />
     <ClInclude Include="SetupState.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="Sync_queue.h" />
@@ -150,6 +153,10 @@
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="throw.cpp" />
     <ClCompile Include="Turn.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Bouwkaarten.csv" />
+    <None Include="karakterkaarten.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
