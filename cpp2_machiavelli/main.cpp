@@ -131,9 +131,7 @@ int main(int argc, const char * argv[])
     ServerSocket server {machiavelli::tcp_port};
 
 	//create the game
-	std::unique_ptr<GameManager> manager = std::make_unique<GameManager>(all_threads);
-	std::unique_ptr<SetupState> state = std::make_unique<SetupState>(*manager);
-	std::unique_ptr<Game> game = std::make_unique<Game>(all_threads, std::move(manager), std::move(state));
+	std::unique_ptr<Game> game = std::make_unique<Game>(all_threads);
 
     try {
         cerr << "server listening" << '\n';

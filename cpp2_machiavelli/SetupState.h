@@ -7,10 +7,13 @@ class SetupState :
 	public GameState
 {
 public:
-	SetupState(GameManager& manager) : GameState(manager) {}
+	SetupState(GameManager& manager) : GameState(manager)
+	{
+		fileReader = std::make_unique<FileReader>();
+	}
 	void next() override;
 private:
 	//InGameState nextState;
-	//FileReader fileReader;
+	std::unique_ptr<FileReader> fileReader;
 };
 
