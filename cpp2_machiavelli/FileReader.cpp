@@ -3,8 +3,10 @@
 #include <iostream>
 #include <sstream>
 
-void FileReader::load_building_cards()
+std::unique_ptr<std::deque<BuildingCard>> FileReader::load_building_cards()
 {
+	std::unique_ptr<std::deque<BuildingCard>> buildingCards;
+	buildingCards = std::make_unique<std::deque<BuildingCard>>();
 	//Get file
 	std::ifstream file("Bouwkaarten.csv");
 	if (file.is_open())
@@ -12,17 +14,12 @@ void FileReader::load_building_cards()
 		BuildingCard bc;
 		while(file >> bc)
 		{
-			buildingCards.push_back(bc);
+			buildingCards->push_back(bc);
 		}
+		return buildingCards;
 	}
-	else
-	{
-		std::cerr << "Unable to open file\n";
-	}
-}
 
-std::deque<BuildingCard>& FileReader::getBuildingCards()
-{
-	return this->buildingCards;
+	std::cerr << "Unable to open file\n";
+	return nullptr;
 }
 

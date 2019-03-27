@@ -22,13 +22,3 @@ private:
 	std::unique_ptr<std::deque<BuildingCard>> buildingCards;
 	std::unique_ptr<std::deque<CharacterCard>> characterCards;
 };
-
-//random shuffle
- template <class RandomAccessIterator, class URNG>
- void shuffle(RandomAccessIterator first, RandomAccessIterator last, URNG&& g)
- {
- 	for (auto i = (last - first) - 1; i > 0; --i) {
- 		std::uniform_int_distribution<i> d(0, i);
- 		swap(first[i], first[d(g)]);
- 	}
- }
