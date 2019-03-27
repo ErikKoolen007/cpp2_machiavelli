@@ -8,6 +8,9 @@ public:
 	{
 		handler = std::make_unique<ClientInputHandler>(clients);
 	}
+
+	ClientInputHandler& getClientInputHandler() const;
+
 private:
 	std::unique_ptr<ClientInputHandler> handler;
 };

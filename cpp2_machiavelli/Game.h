@@ -9,14 +9,13 @@
 class Game
 {
 public:
-	Game(std::vector<std::thread>& clients) : clients(clients)
+	Game(std::vector<std::thread>& clients)
 	{
 		manager = std::make_unique<GameManager>(clients);
 		state = std::make_unique<SetupState>(*manager);
 	}
 
 private:
-	std::vector<std::thread>& clients;
 	std::unique_ptr<GameManager> manager;
 	std::unique_ptr<GameState> state;
 };
