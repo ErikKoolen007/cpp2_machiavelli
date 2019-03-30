@@ -8,7 +8,7 @@ class FileReader
 public:
 	FileReader() = default;
 
-std::unique_ptr<std::deque<BuildingCard>> load_building_cards();
-
+	std::unique_ptr<std::deque<BuildingCard>> loadBuildingCards();
+	std::unique_ptr<std::deque<CharacterCard>> loadCharacterCards();
 };
 
