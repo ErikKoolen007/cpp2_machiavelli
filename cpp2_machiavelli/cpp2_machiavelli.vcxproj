@@ -131,6 +131,7 @@
     <ClInclude Include="InGameState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ClientInputHandler.h" />
+    <ClInclude Include="Server.h" />
     <ClInclude Include="SetupState.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="Sync_queue.h" />
@@ -149,6 +150,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ClientInputHandler.cpp" />
+    <ClCompile Include="Server.cpp" />
     <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="throw.cpp" />
