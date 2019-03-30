@@ -72,7 +72,10 @@
     <ClInclude Include="EndState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClientInputHandler.h">
+    <ClInclude Include="PlayerInputHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -122,5 +125,12 @@
     <ClCompile Include="ClientInputHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Bouwkaarten.csv" />
+    <None Include="karakterkaarten.csv" />
   </ItemGroup>
 </Project>

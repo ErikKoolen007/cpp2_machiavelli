@@ -3,7 +3,7 @@
 #include <iostream>
 #include <sstream>
 
-std::unique_ptr<std::deque<BuildingCard>> FileReader::load_building_cards()
+std::unique_ptr<std::deque<BuildingCard>> FileReader::loadBuildingCards()
 {
 	std::unique_ptr<std::deque<BuildingCard>> buildingCards;
 	buildingCards = std::make_unique<std::deque<BuildingCard>>();
@@ -17,6 +17,26 @@ std::unique_ptr<std::deque<BuildingCard>> FileReader::load_building_cards()
 			buildingCards->push_back(bc);
 		}
 		return buildingCards;
+	}
+
+	std::cerr << "Unable to open file\n";
+	return nullptr;
+}
+
+std::unique_ptr<std::deque<CharacterCard>> FileReader::loadCharacterCards()
+{
+	std::unique_ptr<std::deque<CharacterCard>> characterCards;
+	characterCards = std::make_unique<std::deque<CharacterCard>>();
+	//Get file
+	std::ifstream file("karakterkaarten.csv");
+	if (file.is_open())
+	{
+		CharacterCard cc;
+		while (file >> cc)
+		{
+			characterCards->push_back(cc);
+		}
+		return characterCards;
 	}
 
 	std::cerr << "Unable to open file\n";

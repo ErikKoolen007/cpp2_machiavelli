@@ -54,7 +54,7 @@ void consume_command() // runs in its own thread
 						//std::cout << testCard << std::endl;
 						//client << "Gebouwen:\n" << testCard.to_string() << "\n";
 						FileReader file_reader;
-						file_reader.load_building_cards();
+						file_reader.loadBuildingCards();
 					}
                     client << player.get_name() << ", you wrote: '" << command.get_cmd() << "', but I'll ignore that for now.\r\n" << machiavelli::prompt;
                 } catch (const std::exception& ex) {
