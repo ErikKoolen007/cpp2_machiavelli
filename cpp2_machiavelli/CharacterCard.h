@@ -1,12 +1,16 @@
 #pragma once
 #include <string>
+#include "Card.h"
 
-class CharacterCard
+class CharacterCard :
+	public Card 
 {
 public:
 	void action();
+	std::string writeToConsole() const override;
+	void readFromConsole(std::vector<std::string>& data) override;
 private:
-	int id;
+	std::string id;
 	std::string name;
 };
 

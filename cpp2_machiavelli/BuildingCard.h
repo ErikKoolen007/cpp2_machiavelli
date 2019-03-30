@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
 #include <utility>
-#include <sstream>
 #include <vector>
-#include <iostream>
+#include "Card.h"
 
-class BuildingCard
+class BuildingCard :
+	public Card
 {
 public:
 	BuildingCard() = default;
@@ -25,43 +25,13 @@ public:
 
 	void special_power();
 	std::string to_string();
+	std::string writeToConsole() const override;
+	void readFromConsole(std::vector<std::string>&) override;
 private:
 	std::string name_;
 	int points_ = 0;
 	std::string color_;
 	std::string description_ = "";
 };
-
-inline std::ostream& operator<<(std::ostream& os, const BuildingCard& bc)
-{
-	return os << bc.name() << " (" << bc.color() << ", " << bc.points() << "):";
-}
-
-inline std::istream& operator>>(std::istream& is, BuildingCard& bc)
-{
-	std::string line;
-	std::getline(is, line);
-
-	std::stringstream lineStream(line);
-	std::string cell;
-	std::vector<std::string> data;
-
-	while (std::getline(lineStream, cell, ';'))
-	{
-		data.push_back(cell);
-	}
-
-	if (data.size() >= 3) {
-		bc.name(data.at(0));
-		bc.points(std::stoi(data.at(1)));
-		bc.color(data.at(2));
-	}
-	if(data.size() == 4)
-	{
-		bc.description(data.at(3));
-	}
-
-	return is;
-}
 
 
