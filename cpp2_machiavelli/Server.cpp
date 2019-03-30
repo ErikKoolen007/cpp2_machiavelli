@@ -7,7 +7,6 @@
 
 #include "Server.h"
 #include "FileReader.h"
-#include "Game.h"
 
 void Server::consume_command() // runs in its own thread
 {
@@ -19,15 +18,16 @@ void Server::consume_command() // runs in its own thread
 				auto &player = clientInfo->get_player();
 				try {
 					// TODO handle command here
-					if (command.get_cmd() == "card")
-					{
-						//BuildingCard testCard{ "Test", 2, "Geel" };
-						//std::cout << testCard << std::endl;
-						//client << "Gebouwen:\n" << testCard.to_string() << "\n";
-						FileReader file_reader;
-						file_reader.load_building_cards();
-					}
-					client << player.get_name() << ", you wrote: '" << command.get_cmd() << "', but I'll ignore that for now.\r\n" << prompt_;
+					game_->get_manager().handle_command(*clientInfo, command.get_cmd());
+					//if (command.get_cmd() == "card")
+					//{
+					//	//BuildingCard testCard{ "Test", 2, "Geel" };
+					//	//std::cout << testCard << std::endl;
+					//	//client << "Gebouwen:\n" << testCard.to_string() << "\n";
+					//	FileReader file_reader;
+					//	file_reader.load_building_cards();
+					//}
+					
 				}
 				catch (const std::exception& ex) {
 					std::cerr << "*** exception in consumer thread for player " << player.get_name() << ": " << ex.what() << '\n';
@@ -65,10 +65,9 @@ std::shared_ptr<ClientInfo> Server::init_client_session(Socket client) {
 
 void Server::handle_client(Socket client) // this function runs in a separate thread
 {
-
-	//move to game
 	try {
 		auto client_info = init_client_session(std::move(client));
+		game_->get_manager().add_client(client_info);
 		auto &socket = client_info->get_socket();
 		auto &player = client_info->get_player();
 		socket << "Welcome, " << player.get_name() << ", have fun playing our game!\r\n" << prompt_;
@@ -80,12 +79,10 @@ void Server::handle_client(Socket client) // this function runs in a separate th
 				if (socket.readline([&cmd](std::string input) { cmd = input; })) {
 					std::cerr << '[' << socket.get_dotted_ip() << " (" << socket.get_socket() << ") " << player.get_name() << "] " << cmd << "\r\n";
 
-					//move
 					if (cmd == "quit") {
 						socket.write("Bye!\r\n");
 						break; // out of game loop, will end this thread and close connection
 					}
-					//move
 					else if (cmd == "quit_server") {
 						running_ = false;
 					}
@@ -119,9 +116,6 @@ void Server::init()
 
 	// create a server socket
 	ServerSocket server{ tcp_port_ };
-
-	//create the game
-	//std::unique_ptr<Game> game = std::make_unique<Game>(all_threads);
 
 	try {
 		std::cerr << "server listening" << '\n';

@@ -10,7 +10,7 @@ public:
 	{
 		fileReader = std::make_unique<FileReader>();
 		//prepare the game 
-		setup();
+		SetupState::setup();
 	}
 
 	void next() override;
