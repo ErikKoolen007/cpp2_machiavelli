@@ -1,23 +1,11 @@
 #include "SetupRoundState.h"
-#include <random>
-
-//void SetupState::next()
-//{
-//}
-//
-//void SetupState::setup()
-//{
-//	this->building_cards_ = file_reader_->load_building_cards();
-//	this->character_cards_ = file_reader_->load_character_cards();
-//	//generate seed and shuffle buildingcards
-//	std::random_device rd;
-//	std::mt19937 g(rd());
-//	std::shuffle(building_cards_->begin(), building_cards_->end(), g);
-//}
 
 void SetupRoundState::on_enter(Game& game)
 {
 	game.client_manager().notify_all_players("Successfully entered setup round!");
+	game.game_manager().load_decks();
+	std::cout << "Building cards: " << game.game_manager().building_card_deck_size() << "\n";
+	std::cout << "Character cards: " << game.game_manager().character_card_deck_size() << "\n";
 }
 
 void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const std::string& command)

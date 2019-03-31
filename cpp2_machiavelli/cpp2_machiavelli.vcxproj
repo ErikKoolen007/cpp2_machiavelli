@@ -140,6 +140,7 @@
     <ClInclude Include="Sync_queue.h" />
     <ClInclude Include="throw.h" />
     <ClInclude Include="Turn.h" />
+    <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BuildingCard.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="throw.cpp" />
     <ClCompile Include="Turn.cpp" />
+    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Bouwkaarten.csv" />

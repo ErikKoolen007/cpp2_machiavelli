@@ -16,6 +16,7 @@ void BuildingCard::readFromConsole(std::vector<std::string>& data)
 
 	if (data.size() >= 3) {
 		name_ = data.at(0);
+		points_ = std::stoi(data.at(1));
 		color_ = data.at(2);
 	}
 	if (data.size() == 4)

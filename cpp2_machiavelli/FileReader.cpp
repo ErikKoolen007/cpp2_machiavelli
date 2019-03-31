@@ -1,11 +1,10 @@
 #include "FileReader.h"
 #include <fstream>
 #include <iostream>
-#include <sstream>
 
-std::unique_ptr<std::deque<BuildingCard>> FileReader::load_building_cards()
+std::deque<BuildingCard> FileReader::load_building_cards()
 {
-	std::unique_ptr<std::deque<BuildingCard>> building_cards = std::make_unique<std::deque<BuildingCard>>();
+	std::deque<BuildingCard> building_cards;
 
 	//Get file
 	std::ifstream file("Bouwkaarten.csv");
@@ -14,18 +13,19 @@ std::unique_ptr<std::deque<BuildingCard>> FileReader::load_building_cards()
 		BuildingCard bc;
 		while(file >> bc)
 		{
-			building_cards->push_back(bc);
+			building_cards.push_back(bc);
 		}
+
 		return building_cards;
 	}
 
 	std::cerr << "Unable to open file\n";
-	return nullptr;
+	return building_cards;
 }
 
-std::unique_ptr<std::deque<CharacterCard>> FileReader::load_character_cards()
+std::deque<CharacterCard> FileReader::load_character_cards()
 {
-	std::unique_ptr<std::deque<CharacterCard>> character_cards = std::make_unique<std::deque<CharacterCard>>();
+	std::deque<CharacterCard> character_cards;
 
 	//Get file
 	std::ifstream file("karakterkaarten.csv");
@@ -34,12 +34,13 @@ std::unique_ptr<std::deque<CharacterCard>> FileReader::load_character_cards()
 		CharacterCard cc;
 		while (file >> cc)
 		{
-			character_cards->push_back(cc);
+			character_cards.push_back(cc);
 		}
+
 		return character_cards;
 	}
 
 	std::cerr << "Unable to open file\n";
-	return nullptr;
+	return character_cards;
 }
 
