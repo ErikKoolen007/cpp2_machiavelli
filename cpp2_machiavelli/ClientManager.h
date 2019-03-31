@@ -1,14 +1,14 @@
 #pragma once
 #include <string>
 #include "ClientInfo.h"
-#include "state_machine.h"
+#include "StateMachine.h"
 
 class Game;
 
 class ClientManager
 {
 public:
-	ClientManager(state_machine<Game>& state_machine) : state_machine_(state_machine)
+	ClientManager(StateMachine<Game>& state_machine) : state_machine_(state_machine)
 	{
 	}
 
@@ -19,7 +19,7 @@ public:
 	void notify_all_players(std::string message);
 
 private:
-	state_machine<Game>& state_machine_;
+	StateMachine<Game>& state_machine_;
 	std::vector<std::shared_ptr<ClientInfo>> current_clients_;
 	int last_player_id_ = 0;
 };

@@ -2,7 +2,7 @@
 
 void SetupRoundState::on_enter(Game& game)
 {
-	game.client_manager().notify_all_players("Successfully entered setup round!");
+	game.client_manager().notify_all_players("Successfully entered setup round!\r\n");
 	game.game_manager().load_decks();
 	std::cout << "Building cards: " << game.game_manager().building_card_deck_size() << "\n";
 	std::cout << "Character cards: " << game.game_manager().character_card_deck_size() << "\n";

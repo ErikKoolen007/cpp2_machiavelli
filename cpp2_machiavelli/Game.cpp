@@ -6,7 +6,7 @@
 
 Game::Game()
 {
-	state_machine_ = std::make_unique<state_machine<Game>>(*this);
+	state_machine_ = std::make_unique<StateMachine<Game>>(*this);
 	state_machine_->addState(std::make_unique<PreGameState>());
 	state_machine_->addState(std::make_unique<SetupRoundState>());
 	state_machine_->addState(std::make_unique<GameRoundState>());

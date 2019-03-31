@@ -81,9 +81,6 @@
     <ClInclude Include="State.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="state_machine.h">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
     <ClInclude Include="PreGameState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
@@ -107,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="FileReader.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Header Files\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

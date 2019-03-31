@@ -2,6 +2,7 @@
 
 void PreGameState::on_enter(Game& game)
 {
+	game.client_manager().notify_all_players("Successfully entered pre game!\r\n");
 }
 
 void PreGameState::handle_input(Game& game, ClientInfo& client_info, const std::string& command)

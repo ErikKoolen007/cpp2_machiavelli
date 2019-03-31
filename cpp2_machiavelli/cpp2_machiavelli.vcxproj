@@ -136,7 +136,7 @@
     <ClInclude Include="Server.h" />
     <ClInclude Include="SetupRoundState.h" />
     <ClInclude Include="Socket.h" />
-    <ClInclude Include="state_machine.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Sync_queue.h" />
     <ClInclude Include="throw.h" />
     <ClInclude Include="Turn.h" />

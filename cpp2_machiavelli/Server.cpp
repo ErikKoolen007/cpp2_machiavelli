@@ -86,7 +86,16 @@ void Server::handle_client(Socket client) // this function runs in a separate th
 
 						if (cmd == "quit") {
 							socket.write("Bye!\r\n");
+							const int previous_player_count = game_->client_manager().get_client_count();
+
 							game_->client_manager().remove_client(*client_info);
+							if (previous_player_count == 2)
+							{
+								const std::string message = player.get_name() + " left. Game now has insufficient players and will terminate. \r\n";
+								game_->client_manager().notify_all_players(message);
+								game_->state_machine().change_state("PreGameState");
+							}
+							
 							break; // out of game loop, will end this thread and close connection
 						}
 						else if (cmd == "quit_server") {

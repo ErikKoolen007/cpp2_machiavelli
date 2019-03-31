@@ -5,7 +5,7 @@
 #include <iostream>
 
 template <class entity_type>
-class state_machine
+class StateMachine
 {
 	entity_type& owner_;
 
@@ -15,9 +15,9 @@ class state_machine
 
 public:
 
-	state_machine(entity_type& owner) :owner_(owner) {}
+	StateMachine(entity_type& owner) :owner_(owner) {}
 
-	virtual ~state_machine() = default;
+	virtual ~StateMachine() = default;
 
 	void set_current_state(std::string s) { current_state_ = s; }
 	std::string current_state() const { return current_state_; }
