@@ -1,23 +1,18 @@
 #pragma once
-#include "GameState.h"
 #include "GameManager.h"
 #include <memory>
-#include <vector>
-#include "SetupState.h"
+#include "state_machine.h"
 
 class Game
 {
 public:
-	Game()
-	{
-		manager_ = std::make_unique<GameManager>();
-		state_ = std::make_unique<SetupState>(*manager_);
-	}
+	Game();
 
-	GameManager& get_manager() { return *manager_; }
+	GameManager& game_manager() { return *game_manager_; }
+	void handle_command(ClientInfo& client_info, const std::string& command);
 	
 private:
-	std::unique_ptr<GameManager> manager_;
-	std::unique_ptr<GameState> state_;
+	std::unique_ptr<GameManager> game_manager_;
+	std::unique_ptr<state_machine<Game>> state_machine_;
 };
 

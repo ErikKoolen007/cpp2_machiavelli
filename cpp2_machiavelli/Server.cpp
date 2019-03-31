@@ -18,7 +18,7 @@ void Server::consume_command() // runs in its own thread
 				auto &player = clientInfo->get_player();
 				try {
 					// TODO handle command here
-					game_->get_manager().handle_command(*clientInfo, command.get_cmd());
+					game_->handle_command(*clientInfo, command.get_cmd());
 					//if (command.get_cmd() == "card")
 					//{
 					//	//BuildingCard testCard{ "Test", 2, "Geel" };
@@ -70,12 +70,12 @@ void Server::handle_client(Socket client) // this function runs in a separate th
 		auto &socket = client_info->get_socket();
 		auto &player = client_info->get_player();
 
-		if(game_->get_manager().get_clients().size() >= 2 )
+		if(game_->game_manager().get_clients().size() >= 2 )
 		{
 			socket.write("Sorry the game is full, please try again later. \r\nYou will now be disconnected. Bye!\r\n");
 		}
 		else {
-			game_->get_manager().add_client(client_info);
+			game_->game_manager().add_client(client_info);
 
 			while (running_) { // game loop
 				try {
@@ -86,7 +86,7 @@ void Server::handle_client(Socket client) // this function runs in a separate th
 
 						if (cmd == "quit") {
 							socket.write("Bye!\r\n");
-							game_->get_manager().remove_client(*client_info);
+							game_->game_manager().remove_client(*client_info);
 							break; // out of game loop, will end this thread and close connection
 						}
 						else if (cmd == "quit_server") {

@@ -1,11 +1,14 @@
 #pragma once
 #include "ClientInputHandler.h"
 #include "ClientInfo.h"
+#include "state_machine.h"
+
+class Game;
 
 class GameManager
 {
 public:
-	GameManager()
+	GameManager(state_machine<Game>& state_machine) : state_machine_(state_machine)
 	{
 		handler_ = std::make_unique<ClientInputHandler>();
 	}
@@ -16,10 +19,9 @@ public:
 	std::vector<std::shared_ptr<ClientInfo>>& get_clients() { return current_clients_; }
 	void notify_all_players(std::string message);
 
-	void handle_command(ClientInfo& client_info, const std::string& command) { handler_->handleInput(client_info, command); }
-
 private:
 	std::unique_ptr<ClientInputHandler> handler_;
+	state_machine<Game>& state_machine_;
 	std::vector<std::shared_ptr<ClientInfo>> current_clients_;
 	int last_player_id_ = 0;
 };

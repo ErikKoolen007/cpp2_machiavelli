@@ -23,12 +23,15 @@ void GameManager::add_client(const std::shared_ptr<ClientInfo>& client)
 
 	socket.write("Welcome, " + player.get_name() + ", have fun playing our game!\r\n");
 
-	if (current_clients_.size() == 1)
+	if (current_clients_.size() > 1)
+	{
+		//Start game with setup round
+		state_machine_.change_state("SetupRoundState");
+	}
+	else
 	{
 		socket.write("The game will begin when another player joins.\r\n");
 	}
-
-	//socket.write("machiavelli> ");
 }
 
 void GameManager::remove_client(ClientInfo& client)
