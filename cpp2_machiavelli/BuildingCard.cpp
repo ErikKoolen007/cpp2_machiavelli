@@ -17,9 +17,9 @@ void BuildingCard::readFromConsole(std::vector<std::string>& data)
 	if (data.size() >= 3) {
 		name_ = data.at(0);
 		color_ = data.at(2);
-}
-if (data.size() == 4)
-{
-	description_ = data.at(3);
-}
+	}
+	if (data.size() == 4)
+	{
+		description_ = data.at(3);
+	}
 }

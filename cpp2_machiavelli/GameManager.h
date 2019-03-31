@@ -7,17 +7,20 @@ class GameManager
 public:
 	GameManager()
 	{
-		handler = std::make_unique<ClientInputHandler>();
+		handler_ = std::make_unique<ClientInputHandler>();
 	}
 
-	ClientInputHandler& getClientInputHandler() const;
+	ClientInputHandler& get_client_input_handler() const;
 	void add_client(const std::shared_ptr<ClientInfo>& client);
+	void remove_client(ClientInfo& client);
 	std::vector<std::shared_ptr<ClientInfo>>& get_clients() { return current_clients_; }
-	void handle_command(ClientInfo& client_info, const std::string& command) { handler->handleInput(client_info, command); }
+	void notify_all_players(std::string message);
+
+	void handle_command(ClientInfo& client_info, const std::string& command) { handler_->handleInput(client_info, command); }
 
 private:
-	std::unique_ptr<ClientInputHandler> handler;
+	std::unique_ptr<ClientInputHandler> handler_;
 	std::vector<std::shared_ptr<ClientInfo>> current_clients_;
-	int lastPlayerId = 0;
+	int last_player_id_ = 0;
 };
 

@@ -67,36 +67,43 @@ void Server::handle_client(Socket client) // this function runs in a separate th
 {
 	try {
 		auto client_info = init_client_session(std::move(client));
-		game_->get_manager().add_client(client_info);
 		auto &socket = client_info->get_socket();
 		auto &player = client_info->get_player();
-		socket << "Welcome, " << player.get_name() << ", have fun playing our game!\r\n" << prompt_;
 
-		while (running_) { // game loop
-			try {
-				// read first line of request
-				std::string cmd;
-				if (socket.readline([&cmd](std::string input) { cmd = input; })) {
-					std::cerr << '[' << socket.get_dotted_ip() << " (" << socket.get_socket() << ") " << player.get_name() << "] " << cmd << "\r\n";
+		if(game_->get_manager().get_clients().size() >= 2 )
+		{
+			socket.write("Sorry the game is full, please try again later. \r\nYou will now be disconnected. Bye!\r\n");
+		}
+		else {
+			game_->get_manager().add_client(client_info);
 
-					if (cmd == "quit") {
-						socket.write("Bye!\r\n");
-						break; // out of game loop, will end this thread and close connection
-					}
-					else if (cmd == "quit_server") {
-						running_ = false;
-					}
+			while (running_) { // game loop
+				try {
+					// read first line of request
+					std::string cmd;
+					if (socket.readline([&cmd](std::string input) { cmd = input; })) {
+						std::cerr << '[' << socket.get_dotted_ip() << " (" << socket.get_socket() << ") " << player.get_name() << "] " << cmd << "\r\n";
 
-					ClientCommand command{ cmd, client_info };
-					queue_.put(command);
-				};
+						if (cmd == "quit") {
+							socket.write("Bye!\r\n");
+							game_->get_manager().remove_client(*client_info);
+							break; // out of game loop, will end this thread and close connection
+						}
+						else if (cmd == "quit_server") {
+							running_ = false;
+						}
 
-			}
-			catch (const std::exception& ex) {
-				socket << "ERROR: " << ex.what() << "\r\n";
-			}
-			catch (...) {
-				socket.write("ERROR: something went wrong during handling of your request. Sorry!\r\n");
+						ClientCommand command{ cmd, client_info };
+						queue_.put(command);
+					};
+
+				}
+				catch (const std::exception& ex) {
+					socket << "ERROR: " << ex.what() << "\r\n";
+				}
+				catch (...) {
+					socket.write("ERROR: something went wrong during handling of your request. Sorry!\r\n");
+				}
 			}
 		}
 	}

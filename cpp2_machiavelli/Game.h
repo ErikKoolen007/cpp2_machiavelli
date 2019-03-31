@@ -11,13 +11,13 @@ public:
 	Game()
 	{
 		manager_ = std::make_unique<GameManager>();
-		state = std::make_unique<SetupState>(*manager_);
+		state_ = std::make_unique<SetupState>(*manager_);
 	}
 
 	GameManager& get_manager() { return *manager_; }
 	
 private:
 	std::unique_ptr<GameManager> manager_;
-	std::unique_ptr<GameState> state;
+	std::unique_ptr<GameState> state_;
 };
 
