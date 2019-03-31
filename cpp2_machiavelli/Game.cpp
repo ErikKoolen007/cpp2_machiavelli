@@ -14,6 +14,7 @@ Game::Game()
 	state_machine_->set_current_state("PreGameState");
 
 	game_manager_ = std::make_unique<GameManager>(*state_machine_);
+	client_manager_ = std::make_unique<ClientManager>(*state_machine_);
 }
 
 void Game::handle_command(ClientInfo& client_info, const std::string& command)

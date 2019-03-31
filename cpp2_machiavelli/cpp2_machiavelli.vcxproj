@@ -132,7 +132,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="GameRoundState.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="ClientInputHandler.h" />
+    <ClInclude Include="ClientManager.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="SetupRoundState.h" />
     <ClInclude Include="Socket.h" />
@@ -152,7 +152,7 @@
     <ClCompile Include="GameRoundState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="ClientInputHandler.cpp" />
+    <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="PreGameState.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="SetupRoundState.cpp" />
