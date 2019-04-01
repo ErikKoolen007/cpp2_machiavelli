@@ -2,13 +2,23 @@
 
 std::string CharacterCard::writeToConsole() const
 {
-	return id + "; " + name;
+	return id_ + "; " + name_;
 }
 
 void CharacterCard::readFromConsole(std::vector<std::string>& data)
 {
 	if (data.size() >= 2) {
-		id = data.at(0);
-		name = data.at(1);
+		id_ = data.at(0);
+		name_ = data.at(1);
 	}
+}
+
+std::string CharacterCard::name()
+{
+	return name_;
+}
+
+std::string CharacterCard::id()
+{
+	return id_;
 }

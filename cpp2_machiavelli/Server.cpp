@@ -60,7 +60,28 @@ std::shared_ptr<ClientInfo> Server::init_client_session(Socket client) {
 			name = input;
 		});
 	}
-	return std::make_shared<ClientInfo>(std::move(client), Player{ name });
+
+	client.write("\r\n");
+	done = false;
+
+	client.write("What's your age?\r\n");
+	client.write(prompt_);
+	int age = 0;
+	while (!done) {
+		try
+		{
+		done = client.readline([&age](std::string input) {
+		age = std::stoi(input);
+		});
+		}
+			catch (std::exception& ex)
+		{
+			client.write("invalid age input, please try again \r\n");
+			age = 0;
+		}
+	}
+	client.write("\r\n");
+	return std::make_shared<ClientInfo>(std::move(client), Player{ name, age });
 }
 
 void Server::handle_client(Socket client) // this function runs in a separate thread

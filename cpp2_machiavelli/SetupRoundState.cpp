@@ -6,6 +6,18 @@ void SetupRoundState::on_enter(Game& game)
 	game.game_manager().load_decks();
 	std::cout << "Building cards: " << game.game_manager().building_card_deck_size() << "\n";
 	std::cout << "Character cards: " << game.game_manager().character_card_deck_size() << "\n";
+
+	//oldest player becomes king
+	Player& oldest = game.client_manager().get_clients().at(0)->get_player();
+	for(auto client : game.client_manager().get_clients())
+	{
+		if(client->get_player().age() > oldest.age())
+		{
+			oldest = client->get_player();
+		}
+	}
+	oldest.king(true);
+	game.client_manager().notify_all_players("Player: " + oldest.get_name() + " is the King! \r\n");
 }
 
 void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const std::string& command)

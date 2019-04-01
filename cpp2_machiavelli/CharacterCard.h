@@ -9,8 +9,10 @@ public:
 	void action();
 	std::string writeToConsole() const override;
 	void readFromConsole(std::vector<std::string>& data) override;
+	std::string name();
+	std::string id();
 private:
-	std::string id;
-	std::string name;
+	std::string id_;
+	std::string name_;
 };
 

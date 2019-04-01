@@ -12,8 +12,5 @@ public:
 	void on_exit(Game& game) override;
 	std::string name() override;
 private:
-	//InGameState nextState;
-	//std::unique_ptr<FileReader> file_reader_;
-	//std::unique_ptr<std::deque<BuildingCard>> building_cards_;
-	//std::unique_ptr<std::deque<CharacterCard>> character_cards_;
+
 };
