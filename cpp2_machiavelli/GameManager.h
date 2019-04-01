@@ -12,6 +12,8 @@ public:
 	GameManager(StateMachine<Game>& state_machine) : state_machine_(state_machine)
 	{
 	}
+	std::deque<BuildingCard>& building_cards() { return building_card_deck_; }
+	std::deque<CharacterCard>& character_cards() { return character_card_deck_; }
 	void load_decks();
 	int building_card_deck_size() const { return building_card_deck_.size(); }
 	int character_card_deck_size() const { return character_card_deck_.size(); }

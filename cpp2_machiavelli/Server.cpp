@@ -74,7 +74,7 @@ std::shared_ptr<ClientInfo> Server::init_client_session(Socket client) {
 		age = std::stoi(input);
 		});
 		}
-			catch (std::exception& ex)
+		catch (std::exception& ex)
 		{
 			client.write("invalid age input, please try again \r\n");
 			age = 0;
