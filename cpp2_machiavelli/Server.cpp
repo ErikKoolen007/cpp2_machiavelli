@@ -19,14 +19,6 @@ void Server::consume_command() // runs in its own thread
 				try {
 					// TODO handle command here
 					game_->handle_command(*clientInfo, command.get_cmd());
-					//if (command.get_cmd() == "card")
-					//{
-					//	//BuildingCard testCard{ "Test", 2, "Geel" };
-					//	//std::cout << testCard << std::endl;
-					//	//client << "Gebouwen:\n" << testCard.to_string() << "\n";
-					//	FileReader file_reader;
-					//	file_reader.load_building_cards();
-					//}
 					
 				}
 				catch (const std::exception& ex) {
