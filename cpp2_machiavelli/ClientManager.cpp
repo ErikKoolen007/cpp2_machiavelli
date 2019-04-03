@@ -48,3 +48,15 @@ void ClientManager::notify_all_players(std::string message)
 		client->get_socket().write(message);
 	});
 }
+
+void ClientManager::notify_player(std::string message, int player_id)
+{
+	std::for_each(current_clients_.begin(), current_clients_.end(), [&](auto& client)
+	{
+		if (client->get_player().id() == player_id)
+		{
+			client->get_socket().write(message);
+			return;
+		}
+	});
+}

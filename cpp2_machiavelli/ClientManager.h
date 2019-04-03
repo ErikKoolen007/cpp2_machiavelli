@@ -17,6 +17,7 @@ public:
 	int get_client_count() const { return current_clients_.size(); }
 	std::vector<std::shared_ptr<ClientInfo>>& get_clients() { return current_clients_; }
 	void notify_all_players(std::string message);
+	void notify_player(std::string message, int player_id);
 
 private:
 	StateMachine<Game>& state_machine_;

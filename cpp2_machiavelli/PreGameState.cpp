@@ -45,6 +45,8 @@ void PreGameState::add_starting_resources(Game& game)
 		{
 			oldest = client->get_player();
 		}
+		//create standard message in player
+
 	}
 	oldest.king(true);
 	game.client_manager().notify_all_players("Player: " + oldest.get_name() + " is the King! \r\n");
