@@ -31,6 +31,12 @@ public:
 	std::vector<BuildingCard>& buildings() { return buildings_;  }
 	void add_building(BuildingCard building) { buildings_.push_back(building); }
 
+	CharacterCard& character_card() { return character_; }
+	void character_card(CharacterCard& character_card) { character_ = character_card; }
+
+	std::string getInventoryMsg();
+	
+
 private:
     std::string name;
 	int age_;
@@ -39,5 +45,6 @@ private:
 	int coins_ = 0;
 	bool king_ = false;
 	std::vector<BuildingCard> buildings_;
-	CharacterCard character;
+	CharacterCard character_;
+	std::string getBuildingsStr();
 };

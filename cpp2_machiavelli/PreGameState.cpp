@@ -40,12 +40,15 @@ void PreGameState::add_starting_resources(Game& game)
 			client->get_player().add_building(buildings_pile.front());
 			buildings_pile.pop_front();
 		}
+
 		//oldest player becomes king
 		if (client->get_player().age() > oldest.age())
 		{
 			oldest = client->get_player();
 		}
-		//create standard message in player
+		//send notification to each player
+		game.client_manager().notify_player(client->get_player().getInventoryMsg(), client->get_player().id());
+		game.client_manager().notify_player(client->get_player().character_card().to_string(), client->get_player().id());
 
 	}
 	oldest.king(true);

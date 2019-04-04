@@ -55,8 +55,7 @@ void ClientManager::notify_player(std::string message, int player_id)
 	{
 		if (client->get_player().id() == player_id)
 		{
-			client->get_socket().write(message);
-			return;
+			client->get_socket().write(message + "\r\n");
 		}
 	});
 }

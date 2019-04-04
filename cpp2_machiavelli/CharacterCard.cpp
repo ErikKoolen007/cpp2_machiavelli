@@ -22,3 +22,12 @@ std::string CharacterCard::id()
 {
 	return id_;
 }
+
+std::string CharacterCard::to_string() const
+{
+	if(name_ == "")
+	{
+		return "There is no character assigned to you yet";
+	}
+	return "Your current character is" + name_;
+}
