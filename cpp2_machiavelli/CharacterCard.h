@@ -15,5 +15,6 @@ public:
 private:
 	std::string id_;
 	std::string name_;
+	bool is_dead_;
 };
 
