@@ -31,8 +31,15 @@ void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const st
 
 	try
 	{
-		player.add_character(game.game_manager().get_character_card(std::stoi(command)));
-		game.client_manager().notify_player("Charactercard added! You now have the following characters:  \r\n" + player.get_character_info() + "/r/n/", player.id());
+		//check on numbers and nullptr TODO: clean tis mess code up
+		if(game.game_manager().get_character_card(std::stoi(command)) != nullptr)
+		{
+			game.client_manager().notify_player("Character card added! You now have the following character(s):  \r\n" + player.get_character_info(), player.id());
+		} else
+		{
+			game.client_manager().notify_player("Your input is not valid, please try a valid number", player.id());
+		}
+		
 	} catch(std::exception& ex)
 	{
 		game.client_manager().notify_player("Your input is not valid, please try a valid number", player.id());
