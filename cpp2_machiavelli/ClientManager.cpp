@@ -41,6 +41,12 @@ void ClientManager::remove_client(ClientInfo& client)
 		<< ") left! Current player count = " << current_clients_.size() << "\n";
 }
 
+ClientInfo& ClientManager::get_client(int player_id)
+{
+	return **std::find_if(current_clients_.begin(), current_clients_.end(), 
+									[&](auto& client) { return client->get_player().id() == player_id;});
+}
+
 void ClientManager::notify_all_players(std::string message)
 {
 	std::for_each(current_clients_.begin(), current_clients_.end(), [&](auto& client)

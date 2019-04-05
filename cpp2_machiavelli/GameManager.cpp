@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "Utilities.h"
+#include <algorithm>
 
 void GameManager::load_building_deque()
 {
@@ -19,3 +20,22 @@ BuildingCard GameManager::get_top_card()
 	building_card_deck_.pop_front();
 	return building_card;
 }
+
+CharacterCard GameManager::get_top_character_card()
+{
+	CharacterCard character_card = character_card_deck_.front();
+	character_card_deck_.pop_front();
+	return character_card;
+}
+
+std::string GameManager::get_character_card_info()
+{
+	std::string return_string = "";
+	std::for_each(character_card_deck_.begin(), character_card_deck_.end(), [&](CharacterCard& character_card)
+	{
+		return_string = return_string + character_card.to_string();
+	});
+	return return_string;
+}
+
+
