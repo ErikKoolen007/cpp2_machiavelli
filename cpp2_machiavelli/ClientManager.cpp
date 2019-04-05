@@ -65,3 +65,16 @@ void ClientManager::notify_player(std::string message, int player_id)
 		}
 	});
 }
+
+void ClientManager::lock_client(int player_id, bool lock)
+{
+	get_client(player_id).locked(lock);
+}
+
+void ClientManager::lock_all_clients()
+{
+	std::for_each(current_clients_.begin(), current_clients_.end(), [&](auto& client)
+	{
+		client->locked(true);
+	});
+}

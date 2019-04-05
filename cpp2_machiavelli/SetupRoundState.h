@@ -13,5 +13,5 @@ public:
 	std::string name() override;
 	
 private:
-	void player_draws_characters(int player_id, Game& game);
+	void player_draws_character(int player_id, Game& game);
 };

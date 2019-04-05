@@ -19,5 +19,12 @@ Game::Game()
 
 void Game::handle_command(ClientInfo& client_info, const std::string& command)
 {
-	state_machine_->handle_input(client_info, command);
+	if(client_info.locked())
+	{
+		client_manager().notify_player("\r\n Hey, your are playing out of turn, please wait until it's your turn \r\n", 
+			client_info.get_player().id());
+	} else
+	{
+		state_machine_->handle_input(client_info, command);
+	}
 }

@@ -17,13 +17,19 @@
 class ClientInfo {
     Socket _socket;
     Player _player;
+	bool _locked = false;
 public:
     ClientInfo(Socket socket, Player player)
         : _socket{std::move(socket)}, _player{std::move(player)} {}
+
     Socket& get_socket() { return _socket; }
     const Socket& get_socket() const { return _socket; }
+
     Player& get_player() { return _player; }
     const Player& get_player() const { return _player; }
+
+	bool locked() { return _locked; }
+	void locked(bool locked) { _locked = locked; }
 };
 
 #endif
