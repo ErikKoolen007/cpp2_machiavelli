@@ -13,7 +13,7 @@ public:
 	{
 	}
 	std::deque<BuildingCard>& building_cards() { return building_card_deck_; }
-	std::deque<CharacterCard>& character_cards() { return character_card_deck_; }
+	std::deque<std::unique_ptr<CharacterCard>>& character_cards() { return character_card_deck_; }
 	void load_building_deque();
 	void load_character_deque();
 	BuildingCard get_top_card();
@@ -24,6 +24,6 @@ private:
 	StateMachine<Game>& state_machine_;
 	FileReader file_reader_;
 	std::deque<BuildingCard> building_card_deck_;
-	std::deque<CharacterCard> character_card_deck_;
+	std::deque<std::unique_ptr<CharacterCard>> character_card_deck_;
 };
 

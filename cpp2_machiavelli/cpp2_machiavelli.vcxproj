@@ -118,6 +118,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Assassin.h" />
+    <ClInclude Include="Builder.h" />
     <ClInclude Include="BuildingCard.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CharacterCard.h" />
@@ -125,11 +127,17 @@
     <ClInclude Include="CircularBuffer.h" />
     <ClInclude Include="ClientCommand.h" />
     <ClInclude Include="ClientInfo.h" />
+    <ClInclude Include="Condotierre.h" />
     <ClInclude Include="GameEndState.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="King.h" />
+    <ClInclude Include="Mage.h" />
+    <ClInclude Include="Merchant.h" />
+    <ClInclude Include="Preacher.h" />
     <ClInclude Include="PreGameState.h" />
+    <ClInclude Include="Thief.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="GameRoundState.h" />
     <ClInclude Include="Player.h" />
@@ -144,19 +152,27 @@
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Assassin.cpp" />
+    <ClCompile Include="Builder.cpp" />
     <ClCompile Include="BuildingCard.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CharacterCard.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
+    <ClCompile Include="Condotierre.cpp" />
     <ClCompile Include="GameEndState.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameRoundState.cpp" />
+    <ClCompile Include="King.cpp" />
+    <ClCompile Include="Mage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Merchant.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ClientManager.cpp" />
+    <ClCompile Include="Preacher.cpp" />
     <ClCompile Include="PreGameState.cpp" />
+    <ClCompile Include="Thief.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="SetupRoundState.cpp" />
     <ClCompile Include="Socket.cpp" />

@@ -16,6 +16,7 @@ void PreGameState::handle_input(Game& game, ClientInfo& client_info, const std::
 void PreGameState::on_exit(Game& game)
 {
 	this->add_starting_resources(game);
+	game.game_manager().load_character_deque();
 }
 
 std::string PreGameState::name()
