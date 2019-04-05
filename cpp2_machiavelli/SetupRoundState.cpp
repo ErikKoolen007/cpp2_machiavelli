@@ -32,8 +32,10 @@ void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const st
 	try
 	{
 		//check on numbers and nullptr TODO: clean tis mess code up
-		if(game.game_manager().get_character_card(std::stoi(command)) != nullptr)
+		auto selected_card = game.game_manager().get_character_card(std::stoi(command));
+		if (selected_card != nullptr)
 		{
+			player.add_character(std::move(selected_card));
 			game.client_manager().notify_player("Character card added! You now have the following character(s):  \r\n" + player.get_character_info(), player.id());
 		} else
 		{
