@@ -40,8 +40,8 @@ void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const st
 {
 	auto &client = client_info.get_socket();
 	auto &player = client_info.get_player();
-	// client << player.get_name() << ", id: " << player.id() << ", you wrote: '" << command 
-	// 	<< "' in: " << name() << ", but I'll ignore that for now.\r\n" << "machiavelli> ";
+	 client << player.get_name() << ", id: " << player.id() << ", you wrote: '" << command 
+	 	<< "' in: " << name() << ", but I'll ignore that for now.\r\n" << "machiavelli> ";
 
 }
 
