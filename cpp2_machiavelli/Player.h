@@ -31,7 +31,6 @@ public:
 	std::vector<std::shared_ptr<CharacterCard>>& character_cards() { return characters_; }
 	void add_character(std::unique_ptr<CharacterCard> character) { characters_.emplace_back(std::move(character));  }
 
-
 	std::string getInventoryInfo();
 	std::string get_character_info();
 

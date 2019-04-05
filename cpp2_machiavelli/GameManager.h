@@ -18,6 +18,7 @@ public:
 	void load_character_deque();
 	BuildingCard get_top_building_card();
 	std::unique_ptr<CharacterCard> get_top_character_card();
+	std::unique_ptr<CharacterCard> get_character_card(int id);
 	std::string get_character_card_info();
 	int building_card_deck_size() const { return building_card_deck_.size(); }
 	int character_card_deck_size() const { return character_card_deck_.size(); }

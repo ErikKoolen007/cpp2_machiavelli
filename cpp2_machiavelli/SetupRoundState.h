@@ -14,5 +14,4 @@ public:
 	
 private:
 	void draw_characters(int player_id, Game& game);
-	void add_starting_resources(Game& game);
 };

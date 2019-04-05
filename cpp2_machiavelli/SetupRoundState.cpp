@@ -28,16 +28,49 @@ void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const st
 {
 	auto &client = client_info.get_socket();
 	auto &player = client_info.get_player();
-	 client << player.get_name() << ", id: " << player.id() << ", you wrote: '" << command 
-	 	<< "' in: " << name() << ", but I'll ignore that for now.\r\n" << "machiavelli> ";
 
-	//switch case on command
+	try
+	{
+		player.add_character(game.game_manager().get_character_card(std::stoi(command)));
+		game.client_manager().notify_player("Charactercard added! You now have the following characters:  \r\n" + player.get_character_info() + "/r/n/", player.id());
+	} catch(std::exception& ex)
+	{
+		game.client_manager().notify_player("Your input is not valid, please try a valid number", player.id());
+	}
 
+	// if(command == "1")
+	// {
+	// 	player.add_character(game.game_manager().get_character_card(1));
+	// } 
+	// else if(command == "2")
+	// {
+	// 	player.add_character(game.game_manager().get_character_card(2));
+	// } 
+	// else if(command == "3")
+	// {
+	// 	player.add_character(game.game_manager().get_character_card(3));
+	// } 
+	// else if (command == "5")
+	// {
+	// 	player.add_character(game.game_manager().get_character_card(5));
+	// }
+	// else if (command == "6")
+	// {
+	// 	player.add_character(game.game_manager().get_character_card(6));
+	// }
+	// else if (command == "7")
+	// {
+	// 	player.add_character(game.game_manager().get_character_card(7));
+	// }
+	// else if (command == "8")
+	// {
+	// 	player.add_character(game.game_manager().get_character_card(8));
+	// }
 }
 
 void SetupRoundState::on_exit(Game& game)
 {
-
+	//reset things
 }
 
 std::string SetupRoundState::name()

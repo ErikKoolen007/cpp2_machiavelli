@@ -29,6 +29,12 @@ std::unique_ptr<CharacterCard> GameManager::get_top_character_card()
 	return character_card;
 }
 
+std::unique_ptr<CharacterCard> GameManager::get_character_card(int id)
+{
+	return std::move(*std::find_if(character_card_deck_.begin(), character_card_deck_.end(), 
+		[&](std::unique_ptr<CharacterCard> character_card) {return character_card->id() == id; }));
+}
+
 std::string GameManager::get_character_card_info()
 {
 	std::string return_string = "";
