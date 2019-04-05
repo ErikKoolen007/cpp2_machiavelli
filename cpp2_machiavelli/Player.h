@@ -31,8 +31,8 @@ public:
 	std::vector<BuildingCard>& building_cards() { return buildings_;  }
 	void add_building(BuildingCard building) { buildings_.push_back(building); }
 
-	std::vector<CharacterCard>& character_cards() { return characters_; }
-	void add_character(CharacterCard character) { characters_.push_back(character);  }
+	std::vector<std::unique_ptr<CharacterCard>>& character_cards() { return characters_; }
+	void add_character(std::unique_ptr<CharacterCard> character) { characters_.push_back(character);  }
 
 
 	std::string getInventoryInfo();
@@ -47,6 +47,6 @@ private:
 	int coins_ = 0;
 	bool king_ = false;
 	std::vector<BuildingCard> buildings_;
-	std::vector<CharacterCard> characters_;
+	std::vector<std::unique_ptr<CharacterCard>> characters_;
 	std::string getBuildingInfo();
 };
