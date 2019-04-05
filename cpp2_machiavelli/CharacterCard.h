@@ -10,10 +10,10 @@ public:
 	std::string writeToConsole() const override;
 	void readFromConsole(std::vector<std::string>& data) override;
 	std::string name();
-	std::string id();
+	int id() const;
 	std::string to_string() const;
 private:
-	std::string id_;
+	int id_;
 	std::string name_;
 	bool is_dead_;
 };

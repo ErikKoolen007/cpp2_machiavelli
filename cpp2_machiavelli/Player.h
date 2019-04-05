@@ -28,14 +28,16 @@ public:
 	bool king() { return king_; }
 	void king(bool king) { king_ = king; }
 
-	std::vector<BuildingCard>& buildings() { return buildings_;  }
+	std::vector<BuildingCard>& building_cards() { return buildings_;  }
 	void add_building(BuildingCard building) { buildings_.push_back(building); }
 
-	CharacterCard& character_card() { return character_; }
-	void character_card(CharacterCard& character_card) { character_ = character_card; }
+	std::vector<CharacterCard>& character_cards() { return characters_; }
+	void add_character(CharacterCard character) { characters_.push_back(character);  }
 
-	std::string getInventoryMsg();
-	
+
+	std::string getInventoryInfo();
+	std::string getCharacterInfo();
+
 
 private:
     std::string name;
@@ -45,6 +47,6 @@ private:
 	int coins_ = 0;
 	bool king_ = false;
 	std::vector<BuildingCard> buildings_;
-	CharacterCard character_;
-	std::string getBuildingsStr();
+	std::vector<CharacterCard> characters_;
+	std::string getBuildingInfo();
 };
