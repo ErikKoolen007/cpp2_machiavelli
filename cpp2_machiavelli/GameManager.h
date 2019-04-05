@@ -14,7 +14,9 @@ public:
 	}
 	std::deque<BuildingCard>& building_cards() { return building_card_deck_; }
 	std::deque<CharacterCard>& character_cards() { return character_card_deck_; }
-	void load_decks();
+	void load_building_deque();
+	void load_character_deque();
+	BuildingCard get_top_card();
 	int building_card_deck_size() const { return building_card_deck_.size(); }
 	int character_card_deck_size() const { return character_card_deck_.size(); }
 

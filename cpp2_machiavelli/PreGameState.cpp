@@ -25,8 +25,7 @@ std::string PreGameState::name()
 
 void PreGameState::add_starting_resources(Game& game)
 {
-	game.game_manager().load_decks();
-	auto& buildings_pile = game.game_manager().building_cards();
+	game.game_manager().load_building_deque();
 	auto& clients = game.client_manager().get_clients();
 	Player& oldest = clients.at(0)->get_player();
 
@@ -37,8 +36,7 @@ void PreGameState::add_starting_resources(Game& game)
 		//Draw building cards
 		for (int i = 0; i < 4; i++)
 		{
-			client->get_player().add_building(buildings_pile.front());
-			buildings_pile.pop_front();
+			client->get_player().add_building(game.game_manager().get_top_card());
 		}
 
 		//oldest player becomes king
