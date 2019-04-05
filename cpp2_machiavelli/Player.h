@@ -36,7 +36,7 @@ public:
 
 
 	std::string getInventoryInfo();
-	std::string getCharacterInfo();
+	std::string get_character_info();
 
 
 private:
@@ -48,5 +48,5 @@ private:
 	bool king_ = false;
 	std::vector<BuildingCard> buildings_;
 	std::vector<CharacterCard> characters_;
-	std::string getBuildingInfo();
+	std::string get_building_info();
 };

@@ -46,7 +46,7 @@ void PreGameState::add_starting_resources(Game& game)
 		}
 		//send notification to each player
 		game.client_manager().notify_player(client->get_player().getInventoryInfo(), client->get_player().id());
-		game.client_manager().notify_player(client->get_player().getCharacterInfo(), client->get_player().id());
+		game.client_manager().notify_player(client->get_player().get_character_info(), client->get_player().id());
 
 	}
 	oldest.king(true);

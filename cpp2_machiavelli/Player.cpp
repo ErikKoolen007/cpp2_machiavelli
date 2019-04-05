@@ -14,14 +14,14 @@ std::string Player::getInventoryInfo()
 	return "\r\n Your inventory contains now: \r\n amount of points: " + 
 		std::to_string(points) + "\r\n amount of coins: " + 
 		std::to_string(coins_) + "\r\n " + 
-		getBuildingInfo();
+		get_building_info();
 }
 
-std::string Player::getCharacterInfo()
+std::string Player::get_character_info()
 {
 	if(characters_.empty())
 	{
-		return "\r\n\There are no chracters assigned to you yet \r\n";
+		return "\r\n\There are no characters assigned to you yet \r\n";
 	}
 
 	std::string return_string = "\r\n\You are the following characters: \r\n";
@@ -33,7 +33,7 @@ std::string Player::getCharacterInfo()
 	return return_string;
 }
 
-std::string Player::getBuildingInfo()
+std::string Player::get_building_info()
 {
 	std::string return_string = "\r\n\You have the following buildings: \r\n";
 	std::for_each(buildings_.begin(), buildings_.end(), [&](BuildingCard& building)
