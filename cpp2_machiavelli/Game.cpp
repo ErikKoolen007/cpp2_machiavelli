@@ -21,7 +21,7 @@ void Game::handle_command(ClientInfo& client_info, const std::string& command)
 {
 	if(client_info.locked())
 	{
-		client_manager().notify_player("\r\n Hey, your are playing out of turn, please wait until it's your turn \r\n", 
+		client_manager().notify_player("\r\nHey, your are playing out of turn, please wait until it's your turn \r\n", 
 			client_info.get_player().id());
 	} else
 	{

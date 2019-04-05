@@ -27,9 +27,9 @@ void PreGameState::add_starting_resources(Game& game)
 {
 	game.game_manager().load_building_deque();
 	auto& clients = game.client_manager().get_clients();
-	Player& oldest = clients.at(0)->get_player();
+	int oldest_id = clients.at(0)->get_player().id();
 
-	for (auto client : clients)
+	for (auto& client : clients)
 	{
 		//init coins
 		client->get_player().coins(2);
@@ -40,15 +40,16 @@ void PreGameState::add_starting_resources(Game& game)
 		}
 
 		//oldest player becomes king
-		if (client->get_player().age() > oldest.age())
+		if (client->get_player().age() > game.client_manager().get_client(oldest_id).get_player().id())
 		{
-			oldest = client->get_player();
+			oldest_id = client->get_player().id();
 		}
 		//send notification to each player
 		game.client_manager().notify_player(client->get_player().getInventoryInfo(), client->get_player().id());
 		game.client_manager().notify_player(client->get_player().get_character_info(), client->get_player().id());
 
 	}
-	oldest.king(true);
-	game.client_manager().notify_all_players("Player: " + oldest.get_name() + " is the King! \r\n");
+	Player& oldest_player = game.client_manager().get_client(oldest_id).get_player();
+	oldest_player.king(true);
+	game.client_manager().notify_all_players("Player: " + oldest_player.get_name() + " is the King! \r\n");
 }
