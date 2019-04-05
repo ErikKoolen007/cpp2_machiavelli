@@ -35,7 +35,7 @@ std::deque<CharacterCard> FileReader::load_character_cards()
 		while (file >> cc)
 		{
 			//king is not implemented as a card
-			if(cc.id() != "4")
+			if(cc.id() != 4)
 			{
 				character_cards.push_back(cc);
 			}

@@ -2,7 +2,11 @@
 
 void SetupRoundState::on_enter(Game& game)
 {
+	auto& clients = game.client_manager().get_clients();
+
 	game.client_manager().notify_all_players("Successfully entered setup round!\r\n");
+	
+	
 }
 
 void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const std::string& command)
