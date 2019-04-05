@@ -37,35 +37,6 @@ void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const st
 	{
 		game.client_manager().notify_player("Your input is not valid, please try a valid number", player.id());
 	}
-
-	// if(command == "1")
-	// {
-	// 	player.add_character(game.game_manager().get_character_card(1));
-	// } 
-	// else if(command == "2")
-	// {
-	// 	player.add_character(game.game_manager().get_character_card(2));
-	// } 
-	// else if(command == "3")
-	// {
-	// 	player.add_character(game.game_manager().get_character_card(3));
-	// } 
-	// else if (command == "5")
-	// {
-	// 	player.add_character(game.game_manager().get_character_card(5));
-	// }
-	// else if (command == "6")
-	// {
-	// 	player.add_character(game.game_manager().get_character_card(6));
-	// }
-	// else if (command == "7")
-	// {
-	// 	player.add_character(game.game_manager().get_character_card(7));
-	// }
-	// else if (command == "8")
-	// {
-	// 	player.add_character(game.game_manager().get_character_card(8));
-	// }
 }
 
 void SetupRoundState::on_exit(Game& game)
