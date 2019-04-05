@@ -10,7 +10,7 @@ public:
 
 	//TODO make this more generic XD
 	static void shuffle_building_deck(std::deque<BuildingCard>& deck);
-	static void shuffle_character_deck(std::deque<CharacterCard>& deck);
+	static void shuffle_character_deck(std::deque<std::unique_ptr<CharacterCard>>& deck);
 private:
 	Utilities() = default;
 };

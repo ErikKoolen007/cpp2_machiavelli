@@ -25,17 +25,17 @@
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{b2300646-63f9-4015-b80b-812db8b9c931}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Card">
-      <UniqueIdentifier>{7ee0d749-1183-4a88-a23d-19879e8c0157}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Card">
-      <UniqueIdentifier>{adc70ac1-5c16-4ce1-9a13-9e097dc84273}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{9ed769a7-4934-48ba-829c-6b1abdbce7c8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Utils">
       <UniqueIdentifier>{8acacb0d-0e0a-45e9-8abd-0bf3cf363a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards">
+      <UniqueIdentifier>{7ee0d749-1183-4a88-a23d-19879e8c0157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards">
+      <UniqueIdentifier>{adc70ac1-5c16-4ce1-9a13-9e097dc84273}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -91,13 +91,13 @@
       <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="BuildingCard.h">
-      <Filter>Header Files\Card</Filter>
+      <Filter>Header Files\Cards</Filter>
     </ClInclude>
     <ClInclude Include="Card.h">
-      <Filter>Header Files\Card</Filter>
+      <Filter>Header Files\Cards</Filter>
     </ClInclude>
     <ClInclude Include="CharacterCard.h">
-      <Filter>Header Files\Card</Filter>
+      <Filter>Header Files\Cards</Filter>
     </ClInclude>
     <ClInclude Include="Utilities.h">
       <Filter>Header Files\Utils</Filter>
@@ -107,6 +107,33 @@
     </ClInclude>
     <ClInclude Include="StateMachine.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assassin.h">
+      <Filter>Header Files\Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="Builder.h">
+      <Filter>Header Files\Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="Condotierre.h">
+      <Filter>Header Files\Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="King.h">
+      <Filter>Header Files\Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="Mage.h">
+      <Filter>Header Files\Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="Merchant.h">
+      <Filter>Header Files\Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="Preacher.h">
+      <Filter>Header Files\Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="Thief.h">
+      <Filter>Header Files\Cards</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -150,19 +177,46 @@
       <Filter>Source Files\States</Filter>
     </ClCompile>
     <ClCompile Include="BuildingCard.cpp">
-      <Filter>Source Files\Card</Filter>
+      <Filter>Source Files\Cards</Filter>
     </ClCompile>
     <ClCompile Include="Card.cpp">
-      <Filter>Source Files\Card</Filter>
+      <Filter>Source Files\Cards</Filter>
     </ClCompile>
     <ClCompile Include="CharacterCard.cpp">
-      <Filter>Source Files\Card</Filter>
+      <Filter>Source Files\Cards</Filter>
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="FileReader.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assassin.cpp">
+      <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Builder.cpp">
+      <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Condotierre.cpp">
+      <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="King.cpp">
+      <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Mage.cpp">
+      <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Merchant.cpp">
+      <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Preacher.cpp">
+      <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Thief.cpp">
+      <Filter>Source Files\Cards</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

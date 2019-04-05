@@ -11,7 +11,7 @@ void SetupRoundState::on_enter(Game& game)
 	game.client_manager().notify_all_players("Successfully entered setup round!\r\n");
 
 	//add starting sources for the round
-	std::for_each(clients.begin(), clients.end(), [&](auto& client)
+	std::for_each(clients.begin(), clients.end(), [&](std::shared_ptr<ClientInfo>& client)
 	{
 		Player& curr_player = client->get_player();
 		//unlock the current player

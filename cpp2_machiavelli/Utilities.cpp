@@ -19,7 +19,7 @@ void Utilities::shuffle_building_deck(std::deque<BuildingCard>& deck)
 	std::shuffle(deck.begin(), deck.end(), g);
 }
 
-void Utilities::shuffle_character_deck(std::deque<CharacterCard>& deck)
+void Utilities::shuffle_character_deck(std::deque<std::unique_ptr<CharacterCard>>& deck)
 {
 	std::random_device rd;
 	std::mt19937 g(rd());

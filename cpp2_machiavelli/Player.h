@@ -1,15 +1,12 @@
 #pragma once
-
 #include <string>
-#include <utility>
-#include <vector>
 #include "BuildingCard.h"
 #include "CharacterCard.h"
 
 class Player {
 public:
     Player() = default;
-	Player(std::string name, int age) : name{ std::move(name) }, age_{age}
+	Player(std::string name, int age) : name{std::move(name)}, age_{age}
 	{
 	}
 
@@ -31,8 +28,8 @@ public:
 	std::vector<BuildingCard>& building_cards() { return buildings_;  }
 	void add_building(BuildingCard building) { buildings_.push_back(building); }
 
-	std::vector<CharacterCard>& character_cards() { return characters_; }
-	void add_character(CharacterCard character) { characters_.push_back(character);  }
+	std::vector<std::shared_ptr<CharacterCard>>& character_cards() { return characters_; }
+	void add_character(std::unique_ptr<CharacterCard> character) { characters_.emplace_back(std::move(character));  }
 
 
 	std::string getInventoryInfo();
@@ -41,12 +38,12 @@ public:
 
 private:
     std::string name;
-	int age_;
-	int id_;
+	int age_{};
+	int id_{};
 	int points = 0;
 	int coins_ = 0;
 	bool king_ = false;
 	std::vector<BuildingCard> buildings_;
-	std::vector<CharacterCard> characters_;
+	std::vector<std::shared_ptr<CharacterCard>> characters_;
 	std::string get_building_info();
 };

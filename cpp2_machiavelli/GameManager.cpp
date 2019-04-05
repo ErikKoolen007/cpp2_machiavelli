@@ -21,19 +21,20 @@ BuildingCard GameManager::get_top_card()
 	return building_card;
 }
 
-CharacterCard GameManager::get_top_character_card()
+std::unique_ptr<CharacterCard> GameManager::get_top_character_card()
 {
-	CharacterCard character_card = character_card_deck_.front();
+	std::unique_ptr<CharacterCard> character_card = std::move(character_card_deck_.front());
 	character_card_deck_.pop_front();
+	
 	return character_card;
 }
 
 std::string GameManager::get_character_card_info()
 {
 	std::string return_string = "";
-	std::for_each(character_card_deck_.begin(), character_card_deck_.end(), [&](CharacterCard& character_card)
+	std::for_each(character_card_deck_.begin(), character_card_deck_.end(), [&](std::unique_ptr<CharacterCard>& character_card)
 	{
-		return_string = return_string + character_card.to_string();
+		return_string = return_string + character_card->to_string();
 	});
 	return return_string;
 }
