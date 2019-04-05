@@ -36,7 +36,7 @@ void PreGameState::add_starting_resources(Game& game)
 		//Draw building cards
 		for (int i = 0; i < 4; i++)
 		{
-			client->get_player().add_building(game.game_manager().get_top_card());
+			client->get_player().add_building(game.game_manager().get_top_building_card());
 		}
 
 		//oldest player becomes king
@@ -51,5 +51,5 @@ void PreGameState::add_starting_resources(Game& game)
 	}
 	Player& oldest_player = game.client_manager().get_client(oldest_id).get_player();
 	oldest_player.king(true);
-	game.client_manager().notify_all_players("Player: " + oldest_player.get_name() + " is the King! \r\n");
+	game.client_manager().notify_all_players("Player: " + oldest_player.get_name() + " is the King! \r\n\r\n");
 }

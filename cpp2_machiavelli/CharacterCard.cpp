@@ -25,5 +25,5 @@ int CharacterCard::id() const
 
 std::string CharacterCard::to_string() const
 {
-	return "[ " + std::to_string(id_) + " ]" + name_;
+	return "[" + std::to_string(id_) + "] " + name_ + "\r\n";
 }

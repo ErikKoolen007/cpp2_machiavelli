@@ -14,7 +14,7 @@ void GameManager::load_character_deque()
 	Utilities::shuffle_character_deck(character_card_deck_);
 }
 
-BuildingCard GameManager::get_top_card()
+BuildingCard GameManager::get_top_building_card()
 {
 	BuildingCard building_card = building_card_deck_.front();
 	building_card_deck_.pop_front();
