@@ -10,13 +10,13 @@ void SetupRoundState::on_enter(Game& game)
 
 	bool first = true;
 	//add starting sources for the round
-	std::for_each(clients.begin(), clients.end(), [&](auto& client)
+	std::for_each(clients.begin(), clients.end(), [&](std::shared_ptr<ClientInfo>& client)
 	{
 		auto& curr_player = client->get_player();
 		if(curr_player.king())
 		{
 			//discard the top character card
-			game.game_manager().get_top_card();
+			game.game_manager().get_top_character_card();
 
 			if (!first)
 			{

@@ -25,9 +25,9 @@ std::string Player::get_character_info()
 	}
 
 	std::string return_string = "\r\n\You are the following characters: \r\n";
-	std::for_each(characters_.begin(), characters_.end(), [&](CharacterCard& character)
+	std::for_each(characters_.begin(), characters_.end(), [&](std::shared_ptr<CharacterCard>& character)
 	{
-		return_string = return_string + "- " + character.to_string() + "\r\n";
+		return_string = return_string + "- " + character->to_string() + "\r\n";
 	});
 
 	return return_string;
