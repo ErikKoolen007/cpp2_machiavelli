@@ -12,7 +12,7 @@ public:
 	{
 	}
 
-	void add_client(const std::shared_ptr<ClientInfo>& client);
+	void add_client(std::shared_ptr<ClientInfo>& client);
 	void remove_client(ClientInfo& client);
 	ClientInfo& get_client(int player_id);
 	int get_client_count() const { return current_clients_.size(); }

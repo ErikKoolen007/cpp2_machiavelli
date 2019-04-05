@@ -1,7 +1,7 @@
 #include "ClientManager.h"
 #include <algorithm>
 
-void ClientManager::add_client(const std::shared_ptr<ClientInfo>& client)
+void ClientManager::add_client(std::shared_ptr<ClientInfo>& client)
 {
 	auto &socket = client->get_socket();
 	auto &player = client->get_player();
