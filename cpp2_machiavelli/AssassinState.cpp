@@ -52,17 +52,17 @@ void AssassinState::handle_input(Game& game, ClientInfo& client, const std::stri
 				if(char_card->id() == char_id)
 				{
 					char_card->kill();
-					game.client_manager().notify_all_players("The assassin killed the " + char_card->name() + "\r\n");
 				}
 			});
 		});
 
+		game.client_manager().notify_all_players("The Assassin killed the " + game.character_manager().get_name_by_id(char_id) + "\r\n");
 		game.state_machine().change_state("GameRoundState");
 	}
 	else
 	{
 		socket << player.get_name() << ", id: " << player.id() << ", you wrote: '" << command
-			<< "' but this assassin can't handle that option, try again.\r\n" << "machiavelli> ";
+			<< "' but this Assassin can't handle that option, try again.\r\n" << "machiavelli> ";
 	}
 }
 

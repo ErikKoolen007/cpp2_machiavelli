@@ -6,6 +6,8 @@ void GameRoundState::on_enter(Game& game)
 	//choose the right player who has to play based on his charactres (construct hashmap with player id as key and list of charactercards?)
 		//TODO whatever check this is gonna be. do it in a manager for persistence reasons.
 
+	//Check whether the character is dead -> if so, skip to the next character
+	//Check whether the character has been robbed -> if so, give all his money to the robbed_by player
 	//check boolean to see if player has chosen coins or buildingcards already
 		//give options accordingly
 			//-choose coins or cards

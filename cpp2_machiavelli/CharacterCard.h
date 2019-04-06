@@ -20,11 +20,16 @@ public:
 	void kill() { is_dead_ = true; }
 	bool special_used() const { return special_used_; }
 	void use_special() { special_used_ = true; }
+	bool robbed() const { return robbed_; }
+	void rob(int robbed_by) { robbed_ = true; robbed_by_ = robbed_by; }
+	int robbed_by() const { return robbed_by_; }
 	std::string to_string() const;
 private:
 	int id_{0};
 	std::string name_;
 	bool is_dead_{ false };
 	bool special_used_{ false };
+	bool robbed_{ false };
+	int robbed_by_{ 0 };
 };
 

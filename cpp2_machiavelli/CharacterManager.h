@@ -1,17 +1,11 @@
 #pragma once
-#include "GameManager.h"
+#include <string>
 
 class CharacterManager
 {
 public:
-	CharacterManager(GameManager& game_manager, ClientManager& client_manager): game_manager_(game_manager), client_manager_(client_manager)
-	{
-		
-	}
+	CharacterManager() = default;
 
-	void special_power(int char_id);
-private:
-	GameManager& game_manager_;
-	ClientManager& client_manager_;
+	std::string get_name_by_id(int char_id);
 };
 
