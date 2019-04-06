@@ -2,6 +2,7 @@
 #include <string>
 #include "ClientInfo.h"
 #include "StateMachine.h"
+#include <map>
 
 class Game;
 
@@ -26,7 +27,7 @@ public:
 	void lock_all_clients();
 	void trigger_next_state(std::string new_state);
 	void clear_characters_of_players();
-	std::unordered_map<int, int> get_round_routing_table();
+	std::map<int, int> get_round_routing_table();
 
 private:
 	StateMachine<Game>& state_machine_;

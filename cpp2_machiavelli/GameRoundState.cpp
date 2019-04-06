@@ -1,13 +1,19 @@
 #include "GameRoundState.h"
+#include <map>
 
 void GameRoundState::on_enter(Game& game)
 {
 	game.client_manager().notify_all_players("Successfully entered GameRoundState!");
 	//the routing table is used to iterate over the characters in order and map them to a player. 
 	//FIRST int -> character_id, SECOND int -> player_id
-	std::unordered_map<int, int> round_routing_table = game.client_manager().get_round_routing_table();
+	std::map<int, int> routing_table = game.client_manager().get_round_routing_table();
 
 	//Check whether the character is dead -> if so, skip to the next character
+	// std::for_each(routing_table.begin(), routing_table.end(), [&](int character_id)
+	// {
+	// 	clien
+	// });
+
 	//Check whether the character has been robbed -> if so, give all his money to the robbed_by player
 	//check boolean to see if player has chosen coins or buildingcards already
 		//give options accordingly

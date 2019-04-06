@@ -1,6 +1,7 @@
 #include "ClientManager.h"
 #include <algorithm>
 
+
 void ClientManager::add_client(std::shared_ptr<ClientInfo>& client)
 {
 	auto &socket = client->get_socket();
@@ -107,9 +108,9 @@ void ClientManager::clear_characters_of_players()
 	std::for_each(current_clients_.begin(), current_clients_.end(), [&](auto& client) {client->get_player().clear_characters(); });
 }
 
-std::unordered_map<int, int> ClientManager::get_round_routing_table()
+std::map<int, int> ClientManager::get_round_routing_table()
 {
-	std::unordered_map<int, int> routing_table;
+	std::map<int, int> routing_table;
 	std::for_each(current_clients_.begin(), current_clients_.end(), [&](auto& client)
 	{
 		std::vector<std::shared_ptr<CharacterCard>>& player_characters = client->get_player().character_cards();
