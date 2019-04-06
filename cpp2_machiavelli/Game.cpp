@@ -3,6 +3,14 @@
 #include "GameRoundState.h"
 #include "GameEndState.h"
 #include "PreGameState.h"
+#include "AssassinState.h"
+#include "BuilderState.h"
+#include "CondotierreState.h"
+#include "KingState.h"
+#include "MageState.h"
+#include "MerchantState.h"
+#include "PreacherState.h"
+#include "ThiefState.h"
 
 Game::Game()
 {
@@ -11,6 +19,15 @@ Game::Game()
 	state_machine_->addState(std::make_unique<SetupRoundState>());
 	state_machine_->addState(std::make_unique<GameRoundState>());
 	state_machine_->addState(std::make_unique<GameEndState>());
+
+	state_machine_->addState(std::make_unique<AssassinState>());
+	state_machine_->addState(std::make_unique<BuilderState>());
+	state_machine_->addState(std::make_unique<CondotierreState>());
+	state_machine_->addState(std::make_unique<KingState>());
+	state_machine_->addState(std::make_unique<MageState>());
+	state_machine_->addState(std::make_unique<MerchantState>());
+	state_machine_->addState(std::make_unique<PreacherState>());
+	state_machine_->addState(std::make_unique<ThiefState>());
 	state_machine_->set_current_state("PreGameState");
 
 	game_manager_ = std::make_unique<GameManager>(*state_machine_);

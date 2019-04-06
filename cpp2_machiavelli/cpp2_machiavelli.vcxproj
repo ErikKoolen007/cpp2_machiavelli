@@ -119,7 +119,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Assassin.h" />
+    <ClInclude Include="AssassinState.h" />
     <ClInclude Include="Builder.h" />
+    <ClInclude Include="BuilderState.h" />
     <ClInclude Include="BuildingCard.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CharacterCard.h" />
@@ -128,14 +130,19 @@
     <ClInclude Include="ClientCommand.h" />
     <ClInclude Include="ClientInfo.h" />
     <ClInclude Include="Condotierre.h" />
+    <ClInclude Include="CondotierreState.h" />
     <ClInclude Include="GameEndState.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="King.h" />
+    <ClInclude Include="KingState.h" />
     <ClInclude Include="Mage.h" />
+    <ClInclude Include="MageState.h" />
     <ClInclude Include="Merchant.h" />
+    <ClInclude Include="MerchantState.h" />
     <ClInclude Include="Preacher.h" />
+    <ClInclude Include="PreacherState.h" />
     <ClInclude Include="PreGameState.h" />
     <ClInclude Include="Thief.h" />
     <ClInclude Include="State.h" />
@@ -147,35 +154,44 @@
     <ClInclude Include="Socket.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Sync_queue.h" />
+    <ClInclude Include="ThiefState.h" />
     <ClInclude Include="throw.h" />
     <ClInclude Include="Turn.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assassin.cpp" />
+    <ClCompile Include="AssassinState.cpp" />
     <ClCompile Include="Builder.cpp" />
+    <ClCompile Include="BuilderState.cpp" />
     <ClCompile Include="BuildingCard.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CharacterCard.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="Condotierre.cpp" />
+    <ClCompile Include="CondotierreState.cpp" />
     <ClCompile Include="GameEndState.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameRoundState.cpp" />
     <ClCompile Include="King.cpp" />
+    <ClCompile Include="KingState.cpp" />
     <ClCompile Include="Mage.cpp" />
+    <ClCompile Include="MageState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Merchant.cpp" />
+    <ClCompile Include="MerchantState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="Preacher.cpp" />
+    <ClCompile Include="PreacherState.cpp" />
     <ClCompile Include="PreGameState.cpp" />
     <ClCompile Include="Thief.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="SetupRoundState.cpp" />
     <ClCompile Include="Socket.cpp" />
+    <ClCompile Include="ThiefState.cpp" />
     <ClCompile Include="throw.cpp" />
     <ClCompile Include="Turn.cpp" />
     <ClCompile Include="Utilities.cpp" />

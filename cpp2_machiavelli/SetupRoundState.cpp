@@ -11,7 +11,7 @@ void SetupRoundState::on_enter(Game& game)
 
 	//get the king
 	auto& client = *std::find_if(game.client_manager().get_clients().begin(), game.client_manager().get_clients().end(),
-		[&](std::shared_ptr<ClientInfo>& client) {return client->get_player().king(); });
+		[&](std::shared_ptr<ClientInfo>& client_ptr) {return client_ptr->get_player().king(); });
 	std::unique_ptr<CharacterCard> king_card = std::make_unique<King>(4, "King");
 
 	//add the king card
@@ -34,17 +34,17 @@ void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const st
 		if (selected_card != nullptr)
 		{
 			player.add_character(std::move(selected_card));
-			game.client_manager().notify_player("\r\n\Character card added! You now have the following character(s):  \r\n" + player.get_character_info(), player.id());
+			game.client_manager().notify_player("\r\nCharacter card added! You now have the following character(s):  \r\n" + player.get_character_info(), player.id());
 			game.client_manager().lock_client(player.id(), true);
 			draw_characters(game.client_manager().get_next_client(player.id()).get_player().id(), game);
 		} else
 		{
-			throw std::exception();
+			game.client_manager().notify_player("\r\nThe '" + command + "' input did not return a card, please enter a valid number.\r\n", player.id());
 		}
 		
 	} catch(std::exception& ex)
 	{
-		game.client_manager().notify_player("\rn\Your input is not valid, please try a valid number", player.id());
+		game.client_manager().notify_player("\r\nYour input is not valid, please try a valid number.\r\n", player.id());
 	}
 }
 

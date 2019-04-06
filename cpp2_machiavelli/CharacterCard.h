@@ -10,7 +10,7 @@ public:
 	{
 	}
 	CharacterCard() = default;
-	void action();
+
 	std::string writeToConsole() const override;
 	void readFromConsole(std::vector<std::string>& data) override;
 	std::string name();

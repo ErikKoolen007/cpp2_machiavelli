@@ -2,7 +2,7 @@
 
 void GameRoundState::on_enter(Game& game)
 {
-	game.client_manager().notify_all_players("Succesfully entered GameRoundState!");
+	game.client_manager().notify_all_players("Successfully entered GameRoundState!");
 }
 
 void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std::string& command)

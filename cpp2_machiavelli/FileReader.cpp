@@ -9,8 +9,6 @@
 #include "Builder.h"
 #include "Condotierre.h"
 
-class Assassin;
-
 std::deque<BuildingCard> FileReader::load_building_cards()
 {
 	std::deque<BuildingCard> building_cards;
