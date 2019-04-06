@@ -25,6 +25,8 @@ public:
 	void lock_client(int player_id, bool lock);
 	void lock_all_clients();
 	void trigger_next_state(std::string new_state);
+	void clear_characters_of_players();
+	std::unordered_map<int, int> get_round_routing_table();
 
 private:
 	StateMachine<Game>& state_machine_;

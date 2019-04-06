@@ -4,10 +4,10 @@
 
 void SetupRoundState::on_enter(Game& game)
 {
-	//lock all clients and load the deque
 	game.client_manager().lock_all_clients();
-	game.game_manager().load_character_deque();
 	game.client_manager().notify_all_players("Successfully entered setup round!\r\n");
+	game.client_manager().clear_characters_of_players();
+	game.game_manager().load_character_deque();
 
 	//get the king
 	auto& king = game.client_manager().get_king();
@@ -73,7 +73,7 @@ void SetupRoundState::draw_characters(int player_id, Game& game)
 		game.client_manager().lock_client(player_id, false);
 	} else
 	{
-		//character deque is empty now go to GameRoundState ->
+		//character deque is empty now go to GameRoundState
 		game.client_manager().trigger_next_state("GameRoundState");
 		
 		//TODO remove test code when done

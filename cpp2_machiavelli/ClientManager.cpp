@@ -101,3 +101,23 @@ void ClientManager::trigger_next_state(std::string new_state)
 {
 	this->state_machine_.change_state(new_state);
 }
+
+void ClientManager::clear_characters_of_players()
+{
+	std::for_each(current_clients_.begin(), current_clients_.end(), [&](auto& client) {client->get_player().clear_characters(); });
+}
+
+std::unordered_map<int, int> ClientManager::get_round_routing_table()
+{
+	std::unordered_map<int, int> routing_table;
+	std::for_each(current_clients_.begin(), current_clients_.end(), [&](auto& client)
+	{
+		std::vector<std::shared_ptr<CharacterCard>>& player_characters = client->get_player().character_cards();
+
+		//broken
+		std::for_each(player_characters.begin(), player_characters.end(), [&](auto& character) {
+			routing_table.insert(std::make_pair(character->id(), client->get_player().id()));
+		});
+	});
+	return routing_table;
+}

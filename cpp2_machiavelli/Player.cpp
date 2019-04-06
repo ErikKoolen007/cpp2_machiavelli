@@ -9,6 +9,11 @@
 #include "Player.h"
 #include <algorithm>
 
+void Player::clear_characters()
+{
+	characters_.clear();
+}
+
 std::string Player::getInventoryInfo()
 {
 	return "\r\n Your inventory contains now: \r\n amount of points: " + 

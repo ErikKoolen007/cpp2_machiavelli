@@ -3,8 +3,9 @@
 void GameRoundState::on_enter(Game& game)
 {
 	game.client_manager().notify_all_players("Successfully entered GameRoundState!");
-	//choose the right player who has to play based on his charactres (construct hashmap with player id as key and list of charactercards?)
-		//TODO whatever check this is gonna be. do it in a manager for persistence reasons.
+	//the routing table is used to iterate over the characters in order and map them to a player. 
+	//FIRST int -> character_id, SECOND int -> player_id
+	std::unordered_map<int, int> round_routing_table = game.client_manager().get_round_routing_table();
 
 	//Check whether the character is dead -> if so, skip to the next character
 	//Check whether the character has been robbed -> if so, give all his money to the robbed_by player
@@ -30,7 +31,6 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 
 void GameRoundState::on_exit(Game& game)
 {
-	//clear the characters of all players TODO: do this on start of setupround
 }
 
 std::string GameRoundState::name()
