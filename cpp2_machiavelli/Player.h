@@ -28,6 +28,9 @@ public:
 	std::vector<BuildingCard>& building_cards() { return buildings_;  }
 	void add_building(BuildingCard building) { buildings_.push_back(building); }
 
+	std::vector<BuildingCard>& building_cards_on_table() { return buildings_on_table_; }
+	void add_building_to_table(BuildingCard building) { buildings_on_table_.push_back(building); }
+
 	std::vector<std::shared_ptr<CharacterCard>>& character_cards() { return characters_; }
 	void add_character(std::unique_ptr<CharacterCard> character) { characters_.emplace_back(std::move(character));  }
 
@@ -43,6 +46,7 @@ private:
 	int coins_ = 0;
 	bool king_ = false;
 	std::vector<BuildingCard> buildings_;
+	std::vector<BuildingCard> buildings_on_table_;
 	std::vector<std::shared_ptr<CharacterCard>> characters_;
 	std::string get_building_info();
 };

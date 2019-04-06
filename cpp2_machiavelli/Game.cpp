@@ -32,6 +32,7 @@ Game::Game()
 
 	game_manager_ = std::make_unique<GameManager>(*state_machine_);
 	client_manager_ = std::make_unique<ClientManager>(*state_machine_);
+	character_manager_ = std::make_unique<CharacterManager>(*client_manager_);
 }
 
 void Game::handle_command(ClientInfo& client_info, const std::string& command)
