@@ -117,9 +117,6 @@
     <ClInclude Include="Builder.h">
       <Filter>Header Files\Cards</Filter>
     </ClInclude>
-    <ClInclude Include="Condotierre.h">
-      <Filter>Header Files\Cards</Filter>
-    </ClInclude>
     <ClInclude Include="King.h">
       <Filter>Header Files\Cards</Filter>
     </ClInclude>
@@ -141,9 +138,6 @@
     <ClInclude Include="BuilderState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="CondotierreState.h">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
     <ClInclude Include="KingState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
@@ -158,6 +152,12 @@
     </ClInclude>
     <ClInclude Include="ThiefState.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="CondottiereState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Condottiere.h">
+      <Filter>Header Files\Cards</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -224,9 +224,6 @@
     <ClCompile Include="Builder.cpp">
       <Filter>Source Files\Cards</Filter>
     </ClCompile>
-    <ClCompile Include="Condotierre.cpp">
-      <Filter>Source Files\Cards</Filter>
-    </ClCompile>
     <ClCompile Include="King.cpp">
       <Filter>Source Files\Cards</Filter>
     </ClCompile>
@@ -248,9 +245,6 @@
     <ClCompile Include="BuilderState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="CondotierreState.cpp">
-      <Filter>Source Files\States</Filter>
-    </ClCompile>
     <ClCompile Include="KingState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
@@ -265,6 +259,12 @@
     </ClCompile>
     <ClCompile Include="ThiefState.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="CondottiereState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Condottiere.cpp">
+      <Filter>Source Files\Cards</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

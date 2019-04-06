@@ -15,6 +15,7 @@ public:
 	void add_client(std::shared_ptr<ClientInfo>& client);
 	void remove_client(ClientInfo& client);
 	ClientInfo& get_client(int player_id);
+	ClientInfo& get_current_client();
 	int get_client_count() const { return current_clients_.size(); }
 	std::vector<std::shared_ptr<ClientInfo>>& get_clients() { return current_clients_; }
 	ClientInfo& get_next_client(int current_client_id);
@@ -22,7 +23,7 @@ public:
 	void notify_player(std::string message, int player_id);
 	void lock_client(int player_id, bool lock);
 	void lock_all_clients();
-	void trigger_next_state(std::string state);
+	void trigger_next_state(std::string new_state);
 
 private:
 	StateMachine<Game>& state_machine_;

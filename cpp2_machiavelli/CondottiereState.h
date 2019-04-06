@@ -2,10 +2,10 @@
 #include "State.h"
 #include "Game.h"
 
-class CondotierreState : public State<Game>
+class CondottiereState : public State<Game>
 {
 public:
-	CondotierreState() = default;
+	CondottiereState() = default;
 
 	void on_enter(Game& game) override;
 	void handle_input(Game& game, ClientInfo& client, const std::string& command) override;

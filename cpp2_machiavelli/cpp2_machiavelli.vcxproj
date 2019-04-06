@@ -129,8 +129,8 @@
     <ClInclude Include="CircularBuffer.h" />
     <ClInclude Include="ClientCommand.h" />
     <ClInclude Include="ClientInfo.h" />
-    <ClInclude Include="Condotierre.h" />
-    <ClInclude Include="CondotierreState.h" />
+    <ClInclude Include="Condottiere.h" />
+    <ClInclude Include="CondottiereState.h" />
     <ClInclude Include="GameEndState.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Game.h" />
@@ -168,8 +168,8 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CharacterCard.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
-    <ClCompile Include="Condotierre.cpp" />
-    <ClCompile Include="CondotierreState.cpp" />
+    <ClCompile Include="Condottiere.cpp" />
+    <ClCompile Include="CondottiereState.cpp" />
     <ClCompile Include="GameEndState.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Game.cpp" />

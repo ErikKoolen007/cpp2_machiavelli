@@ -7,7 +7,7 @@
 #include "Preacher.h"
 #include "Merchant.h"
 #include "Builder.h"
-#include "Condotierre.h"
+#include "Condottiere.h"
 
 std::deque<BuildingCard> FileReader::load_building_cards()
 {
@@ -63,7 +63,7 @@ std::deque<std::unique_ptr<CharacterCard>> FileReader::load_character_cards()
 				character_cards.push_back(std::make_unique<Builder>(cc.id(), cc.name()));
 				break;
 			case 8:
-				character_cards.push_back(std::make_unique<Condotierre>(cc.id(), cc.name()));
+				character_cards.push_back(std::make_unique<Condottiere>(cc.id(), cc.name()));
 				break;
 			default: 
 				std::cerr << "Unknown character: " << cc.id() << "| " << cc.name() << "\n";

@@ -74,8 +74,13 @@ void SetupRoundState::draw_characters(int player_id, Game& game)
 		game.client_manager().lock_client(player_id, false);
 	} else
 	{
-		//character deque is empty now go to inroundstate ->
+		//character deque is empty now go to GameRoundState ->
 		game.client_manager().trigger_next_state("GameRoundState");
+		
+		//TODO remove test code when done
+		//game.client_manager().lock_client(player_id, false);
+		//game.client_manager().trigger_next_state("BuilderState");
+		
 	}
 }
 

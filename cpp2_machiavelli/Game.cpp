@@ -5,7 +5,7 @@
 #include "PreGameState.h"
 #include "AssassinState.h"
 #include "BuilderState.h"
-#include "CondotierreState.h"
+#include "CondottiereState.h"
 #include "KingState.h"
 #include "MageState.h"
 #include "MerchantState.h"
@@ -22,7 +22,7 @@ Game::Game()
 
 	state_machine_->addState(std::make_unique<AssassinState>());
 	state_machine_->addState(std::make_unique<BuilderState>());
-	state_machine_->addState(std::make_unique<CondotierreState>());
+	state_machine_->addState(std::make_unique<CondottiereState>());
 	state_machine_->addState(std::make_unique<KingState>());
 	state_machine_->addState(std::make_unique<MageState>());
 	state_machine_->addState(std::make_unique<MerchantState>());
