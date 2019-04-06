@@ -35,6 +35,8 @@ void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const st
 		{
 			player.add_character(std::move(selected_card));
 			game.client_manager().notify_player("Character card added! You now have the following character(s):  \r\n" + player.get_character_info(), player.id());
+			game.client_manager().lock_client(player.id(), true);
+			draw_characters(game.client_manager().get_next_client(player.id()).get_player().id(), game);
 		} else
 		{
 			throw std::exception();
@@ -58,17 +60,22 @@ std::string SetupRoundState::name()
 
 void SetupRoundState::draw_characters(int player_id, Game& game)
 {
-	auto& client = game.client_manager().get_client(player_id);
+	if(game.game_manager().character_card_deck_size() > 1)
+	{
+		auto& client = game.client_manager().get_client(player_id);
 
-	//discard the top card of the deque
-	game.game_manager().get_top_character_card();
+		//discard the top card of the deque
+		game.game_manager().get_top_character_card();
 
-	//notify the player that he needs to draw
-	game.client_manager().notify_player("please choose one of the below character cards by typing the number of the card \r\n", player_id);
-	game.client_manager().notify_player(game.game_manager().get_character_card_info(), player_id);
-	
-	//unlock the current player and start handling input
-	game.client_manager().lock_client(player_id, false);
+		//notify the player that he needs to draw
+		game.client_manager().notify_player("please choose one of the below character cards by typing the number of the card \r\n", player_id);
+		game.client_manager().notify_player(game.game_manager().get_character_card_info(), player_id);
+
+		//unlock the current player and start handling input
+		game.client_manager().lock_client(player_id, false);
+	}
+	//character deque is empty now go to inroundstate ->
+
 }
 
 

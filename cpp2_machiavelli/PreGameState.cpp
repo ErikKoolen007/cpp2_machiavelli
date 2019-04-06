@@ -40,7 +40,7 @@ void PreGameState::add_starting_resources(Game& game)
 		}
 
 		//oldest player becomes king
-		if (client->get_player().age() > game.client_manager().get_client(oldest_id).get_player().id())
+		if (client->get_player().age() > game.client_manager().get_client(oldest_id).get_player().age())
 		{
 			oldest_id = client->get_player().id();
 		}

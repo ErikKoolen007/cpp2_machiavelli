@@ -43,6 +43,16 @@ std::unique_ptr<CharacterCard> GameManager::get_character_card(int id)
 	}
 	return nullptr;
 
+	//  auto result = std::find_if(character_card_deck_.begin(), character_card_deck_.end(),
+	// 	[&](std::unique_ptr<CharacterCard>& character_card) {return character_card->id() == id; });
+	//
+	// if ( result != std::end(character_card_deck_))
+	// {
+	// 	auto moved = std::move(*result);
+	// 	return  moved;
+	// } 
+	//
+	// return nullptr;
 }
 
 std::string GameManager::get_character_card_info()
