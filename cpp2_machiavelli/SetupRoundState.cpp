@@ -10,18 +10,17 @@ void SetupRoundState::on_enter(Game& game)
 	game.client_manager().notify_all_players("Successfully entered setup round!\r\n");
 
 	//get the king
-	auto& client = *std::find_if(game.client_manager().get_clients().begin(), game.client_manager().get_clients().end(),
-		[&](std::shared_ptr<ClientInfo>& client_ptr) {return client_ptr->get_player().king(); });
+	auto& king = game.client_manager().get_king();
 	std::unique_ptr<CharacterCard> king_card = std::make_unique<King>(4, "King");
 
 	//add the king card
-	client->get_player().add_character(std::move(king_card));
+	king.get_player().add_character(std::move(king_card));
 
 	//discard the top character card
 	game.game_manager().get_top_character_card();
 
 	//go to next player
-	draw_characters(game.client_manager().get_next_client(client->get_player().id()).get_player().id(), game);
+	draw_characters(game.client_manager().get_next_client(king.get_player().id()).get_player().id(), game);
 }
 
 void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const std::string& command)

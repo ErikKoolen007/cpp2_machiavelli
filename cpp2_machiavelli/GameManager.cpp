@@ -32,7 +32,6 @@ std::unique_ptr<CharacterCard> GameManager::get_top_character_card()
 std::unique_ptr<CharacterCard> GameManager::get_character_card(int id)
 {
 	for (auto it = character_card_deck_.begin(); it != character_card_deck_.end(); ++it) {
-		//int i = it - character_card_deck_.begin();
 		std::unique_ptr<CharacterCard>& element = *it;
 		
 		if ( element != nullptr && element->id() == id)

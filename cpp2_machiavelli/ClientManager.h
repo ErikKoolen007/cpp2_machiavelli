@@ -15,6 +15,7 @@ public:
 	void add_client(std::shared_ptr<ClientInfo>& client);
 	void remove_client(ClientInfo& client);
 	ClientInfo& get_client(int player_id);
+	ClientInfo& get_king();
 	ClientInfo& get_current_client();
 	int get_client_count() const { return current_clients_.size(); }
 	std::vector<std::shared_ptr<ClientInfo>>& get_clients() { return current_clients_; }

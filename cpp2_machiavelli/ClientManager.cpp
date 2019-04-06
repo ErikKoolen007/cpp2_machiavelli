@@ -47,6 +47,12 @@ ClientInfo& ClientManager::get_client(int player_id)
 									[&](auto& client) { return client->get_player().id() == player_id;});
 }
 
+ClientInfo& ClientManager::get_king()
+{
+	return **std::find_if(get_clients().begin(), get_clients().end(),
+		[&](std::shared_ptr<ClientInfo>& client_ptr) {return client_ptr->get_player().king(); });
+}
+
 ClientInfo& ClientManager::get_current_client()
 {
 	return **std::find_if_not(current_clients_.begin(), current_clients_.end(),
