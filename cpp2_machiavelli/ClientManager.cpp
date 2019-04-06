@@ -114,8 +114,6 @@ std::map<int, int> ClientManager::get_round_routing_table()
 	std::for_each(current_clients_.begin(), current_clients_.end(), [&](auto& client)
 	{
 		std::vector<std::shared_ptr<CharacterCard>>& player_characters = client->get_player().character_cards();
-
-		//broken
 		std::for_each(player_characters.begin(), player_characters.end(), [&](auto& character) {
 			routing_table.insert(std::make_pair(character->id(), client->get_player().id()));
 		});

@@ -12,5 +12,6 @@ public:
 	void on_exit(Game& game) override;
 	std::string name() override;
 private:
+	bool building_coin_input = false;
 };
 
