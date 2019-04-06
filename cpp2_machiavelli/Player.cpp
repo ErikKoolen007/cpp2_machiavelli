@@ -9,6 +9,12 @@
 #include "Player.h"
 #include <algorithm>
 
+std::shared_ptr<CharacterCard>& Player::character_card(int character_id)
+{
+	return *std::find_if(characters_.begin(), characters_.end(), 
+		[&](auto& character) {return character->id() == character_id; });
+}
+
 void Player::clear_characters()
 {
 	characters_.clear();

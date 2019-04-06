@@ -1,5 +1,6 @@
 #include "GameRoundState.h"
 #include <map>
+#include <algorithm>
 
 void GameRoundState::on_enter(Game& game)
 {
@@ -9,18 +10,25 @@ void GameRoundState::on_enter(Game& game)
 	std::map<int, int> routing_table = game.client_manager().get_round_routing_table();
 
 	//Check whether the character is dead -> if so, skip to the next character
-	// std::for_each(routing_table.begin(), routing_table.end(), [&](int character_id)
-	// {
-	// 	clien
-	// });
+		//Check whether the character has been robbed -> if so, give all his money to the robbed_by player
+		//check boolean to see if player has chosen coins or buildingcards already
+			//give options accordingly
+				//-choose coins or cards
+				//-show round specific choices
+					//Check whether character used his special ability
+					//Show special ability option if not
+	std::for_each(routing_table.begin(), routing_table.end(), [&](std::pair<int, int> pair)
+	{
+		int character_id = pair.first;
+		int player_id = pair.second;
+		auto current_character = game.client_manager().get_client(player_id).get_player().character_card(character_id);
+		 if(!current_character->dead())
+		 {
+		 	
+		 }
+	});
 
-	//Check whether the character has been robbed -> if so, give all his money to the robbed_by player
-	//check boolean to see if player has chosen coins or buildingcards already
-		//give options accordingly
-			//-choose coins or cards
-			//-show round specific choices
-				//Check whether character used his special ability
-				//Show special ability option if not
+
 
 	//add resources at the start of the turn if needed
 }

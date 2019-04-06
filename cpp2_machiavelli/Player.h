@@ -32,6 +32,7 @@ public:
 	void add_building_to_table(BuildingCard building) { buildings_on_table_.push_back(building); }
 
 	std::vector<std::shared_ptr<CharacterCard>>& character_cards() { return characters_; }
+	std::shared_ptr<CharacterCard>& character_card(int character_id);
 	void add_character(std::unique_ptr<CharacterCard> character) { characters_.emplace_back(std::move(character));  }
 	void clear_characters();
 
