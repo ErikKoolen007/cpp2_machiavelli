@@ -26,12 +26,10 @@ void SetupRoundState::on_enter(Game& game)
 
 void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const std::string& command)
 {
-	auto &client = client_info.get_socket();
 	auto &player = client_info.get_player();
 
 	try
 	{
-		//check on numbers and nullptr TODO: clean tis mess code up
 		auto selected_card = game.game_manager().get_character_card(std::stoi(command));
 		if (selected_card != nullptr)
 		{
@@ -39,7 +37,7 @@ void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const st
 			game.client_manager().notify_player("Character card added! You now have the following character(s):  \r\n" + player.get_character_info(), player.id());
 		} else
 		{
-			game.client_manager().notify_player("Your input is not valid, please try a valid number", player.id());
+			throw std::exception();
 		}
 		
 	} catch(std::exception& ex)

@@ -31,15 +31,25 @@ std::unique_ptr<CharacterCard> GameManager::get_top_character_card()
 
 std::unique_ptr<CharacterCard> GameManager::get_character_card(int id)
 {
-	for(int i = 0; i < character_card_deck_.size(); i++)
+	 auto result = std::find_if(character_card_deck_.begin(), character_card_deck_.end(),
+		[&](std::unique_ptr<CharacterCard>& character_card) {return character_card->id() == id; });
+
+	if ( result != std::end(character_card_deck_))
 	{
-		if(id == character_card_deck_.at(i)->id())
-		{
-			return std::move(*std::find_if(character_card_deck_.begin(), character_card_deck_.end(),
-				[&](std::unique_ptr<CharacterCard>& character_card) {return character_card->id() == id; }));
-		}
-	}
+		return  std::move(*result);
+	} 
+
 	return nullptr;
+
+	// for(int i = 0; i < character_card_deck_.size(); i++)
+	// {
+	// 	if(id == character_card_deck_.at(i)->id())
+	// 	{
+	// 		return std::move(*std::find_if(character_card_deck_.begin(), character_card_deck_.end(),
+	// 			[&](std::unique_ptr<CharacterCard>& character_card) {return character_card->id() == id; }));
+	// 	}
+	// }
+	// return nullptr;
 }
 
 std::string GameManager::get_character_card_info()
