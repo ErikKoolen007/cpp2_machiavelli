@@ -22,6 +22,7 @@ public:
 	void notify_player(std::string message, int player_id);
 	void lock_client(int player_id, bool lock);
 	void lock_all_clients();
+	void trigger_next_state(std::string state);
 
 private:
 	StateMachine<Game>& state_machine_;

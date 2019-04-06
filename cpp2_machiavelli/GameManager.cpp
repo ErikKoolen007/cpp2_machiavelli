@@ -33,16 +33,16 @@ std::unique_ptr<CharacterCard> GameManager::get_character_card(int id)
 {
 	for (auto it = character_card_deck_.begin(); it != character_card_deck_.end(); ++it) {
 		//int i = it - character_card_deck_.begin();
-		std::unique_ptr<CharacterCard> element = std::move(*it);
+		std::unique_ptr<CharacterCard>& element = *it;
 		
 		if ( element != nullptr && element->id() == id)
 		{
+			std::unique_ptr<CharacterCard> moved = std::move(*it);
 			character_card_deck_.erase(it);
-			return element;
+			return moved;
 		} 
 	}
 	return nullptr;
-
 }
 
 std::string GameManager::get_character_card_info()

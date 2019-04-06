@@ -84,3 +84,8 @@ void ClientManager::lock_all_clients()
 		client->locked(true);
 	});
 }
+
+void ClientManager::trigger_next_state(std::string new_state)
+{
+	this->state_machine_.change_state(new_state);
+}

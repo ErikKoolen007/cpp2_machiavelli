@@ -34,7 +34,7 @@ void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const st
 		if (selected_card != nullptr)
 		{
 			player.add_character(std::move(selected_card));
-			game.client_manager().notify_player("Character card added! You now have the following character(s):  \r\n" + player.get_character_info(), player.id());
+			game.client_manager().notify_player("\r\n\Character card added! You now have the following character(s):  \r\n" + player.get_character_info(), player.id());
 			game.client_manager().lock_client(player.id(), true);
 			draw_characters(game.client_manager().get_next_client(player.id()).get_player().id(), game);
 		} else
@@ -44,13 +44,12 @@ void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const st
 		
 	} catch(std::exception& ex)
 	{
-		game.client_manager().notify_player("Your input is not valid, please try a valid number", player.id());
+		game.client_manager().notify_player("\rn\Your input is not valid, please try a valid number", player.id());
 	}
 }
 
 void SetupRoundState::on_exit(Game& game)
 {
-	//reset things
 }
 
 std::string SetupRoundState::name()
@@ -73,9 +72,11 @@ void SetupRoundState::draw_characters(int player_id, Game& game)
 
 		//unlock the current player and start handling input
 		game.client_manager().lock_client(player_id, false);
+	} else
+	{
+		//character deque is empty now go to inroundstate ->
+		game.client_manager().trigger_next_state("GameRoundState");
 	}
-	//character deque is empty now go to inroundstate ->
-
 }
 
 
