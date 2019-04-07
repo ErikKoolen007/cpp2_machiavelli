@@ -30,9 +30,11 @@ public:
 
 	std::vector<BuildingCard>& building_cards_on_table() { return buildings_on_table_; }
 	void add_building_to_table(BuildingCard building) { buildings_on_table_.push_back(building); }
+	void destroy_building(int index);
 
 	std::vector<std::shared_ptr<CharacterCard>>& character_cards() { return characters_; }
 	std::shared_ptr<CharacterCard>& character_card(int character_id);
+	bool has_character_card(int character_id);
 	void add_character(std::unique_ptr<CharacterCard> character) { characters_.emplace_back(std::move(character));  }
 	void clear_characters();
 

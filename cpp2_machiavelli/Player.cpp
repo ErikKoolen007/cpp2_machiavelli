@@ -9,10 +9,24 @@
 #include "Player.h"
 #include <algorithm>
 
+void Player::destroy_building(int index)
+{
+	if(building_cards_on_table().size() > static_cast<unsigned>(index) && index >= 0)
+		building_cards_on_table().erase(building_cards_on_table().begin() + index);
+}
+
 std::shared_ptr<CharacterCard>& Player::character_card(int character_id)
 {
 	return *std::find_if(characters_.begin(), characters_.end(), 
 		[&](auto& character) {return character->id() == character_id; });
+}
+
+bool Player::has_character_card(int character_id)
+{
+	const auto characters_ptr = std::find_if(characters_.begin(), characters_.end(),
+		[&](auto& character) {return character->id() == character_id; });
+
+	return characters_ptr != std::end(characters_);
 }
 
 void Player::clear_characters()
