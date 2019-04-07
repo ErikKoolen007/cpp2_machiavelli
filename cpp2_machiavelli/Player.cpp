@@ -43,7 +43,7 @@ void Player::clear_characters()
 std::string Player::getInventoryInfo()
 {
 	return "\r\n Your inventory contains now: \r\n amount of points: " + 
-		std::to_string(points) + "\r\n amount of coins: " + 
+		std::to_string(points_) + "\r\n amount of coins: " + 
 		std::to_string(coins_) + "\r\n " + 
 		get_building_info();
 }

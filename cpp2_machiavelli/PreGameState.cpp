@@ -3,6 +3,15 @@
 void PreGameState::on_enter(Game& game)
 {
 	game.client_manager().notify_all_players("Successfully entered pre game!\r\n");
+	if (game.client_manager().get_client_count() > 1)
+	{
+		//Start game with setup round
+		game.state_machine().change_state("SetupRoundState");
+	}
+	else
+	{
+		game.client_manager().notify_all_players("The game will begin when another player joins.\r\n");
+	}
 }
 
 void PreGameState::handle_input(Game& game, ClientInfo& client_info, const std::string& command)
