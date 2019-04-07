@@ -16,6 +16,12 @@ void GameManager::load_character_deque()
 
 void GameManager::load_character_order_queue()
 {
+	if (!character_order_queue_.empty()) {
+		//empty queue
+		std::queue<int> empty;
+		std::swap(character_order_queue_, empty);
+	}
+
 	//4 -3 -2 - 1 - 5 - 6 - 7 - 8
 	character_order_queue_.push(4);
 	character_order_queue_.push(1);
