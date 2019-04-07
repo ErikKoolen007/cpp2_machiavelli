@@ -71,7 +71,7 @@ bool ClientManager::check_if_eight_buildings()
 	for (auto it = current_clients_.begin(); it != current_clients_.end(); ++it) {
 		auto& element = *it;
 
-		if (element->get_player().building_cards_on_table().size() == 8)
+		if (element->get_player().building_cards_on_table().size() >= 8)
 		{
 			return true;
 		}

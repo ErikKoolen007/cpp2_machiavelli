@@ -9,20 +9,16 @@ void GameRoundState::on_enter(Game& game)
 
 	character_id = game.game_manager().get_character_order_queue().front();
 
-	while (!done) {
-		if (routing_table.count(character_id))
-		{
-			player_id = routing_table.find(character_id)->second;
-			done = true;
-		}
-		else
-		{
-			game.client_manager().notify_all_players("The King called for the " + game.character_manager().get_name_by_id(character_id)
-				+ " but none answered.\r\n");
+	if (routing_table.count(character_id))
+	{
+		player_id = routing_table.find(character_id)->second;
+	}
+	else
+	{
+		game.client_manager().notify_all_players("The King called for the " + game.character_manager().get_name_by_id(character_id)
+			+ " but none answered.\r\n");
 
-			game.game_manager().pop_character_order_queue();
-			character_id = game.game_manager().get_character_order_queue().front();
-		}
+		end_turn(game);
 	}
 	
 	Player& current_player = game.client_manager().get_client(player_id).get_player();
@@ -178,6 +174,7 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 					current_player.getInventoryInfo() + current_player.get_played_buildings_info(), player_id);
 				building_ = false;
 				buildings_built_++;
+				game.client_manager().notify_player(generate_options_msg(current_character), player_id);
 			}
 		}
 		catch (std::exception& ex)

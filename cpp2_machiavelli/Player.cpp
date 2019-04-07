@@ -91,7 +91,7 @@ std::string Player::get_building_info()
 
 std::string Player::get_played_buildings_info()
 {
-	std::string return_string = "\r\n\You have played the following buildings: \r\n";
+	std::string return_string = "\r\nYou have played the following buildings: \r\n";
 	
 	if(buildings_on_table_.empty())
 	{
