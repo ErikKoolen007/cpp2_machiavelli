@@ -18,6 +18,7 @@ public:
 	void load_building_deque();
 	void load_character_deque();
 	int pop_character_order_queue();
+	int get_character_order_queue_size() const { return character_order_queue_.size(); }
 	BuildingCard get_top_building_card();
 	std::unique_ptr<CharacterCard> get_top_character_card();
 	std::unique_ptr<CharacterCard> get_character_card(int id);

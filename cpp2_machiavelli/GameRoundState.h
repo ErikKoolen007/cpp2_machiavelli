@@ -19,6 +19,7 @@ private:
 	int buildings_built_ = 0;
 	bool building_coins_used_ = false;
 	bool building_ = false;
+	bool king_killed_ = false;
 	int player_id = 999;
 	int character_id = 999;
 };

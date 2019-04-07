@@ -45,6 +45,10 @@ void GameRoundState::on_enter(Game& game)
 		game.client_manager().lock_client(player_id, false);
 	 } else
 	 {
+		 if(current_character->name() == "Koning")
+		 {
+			 king_killed_ = true;
+		 }
 		 game.client_manager().notify_player("Oi boi, you have been assassinated, you are skipping a turn now... \r\n", player_id);
 	 }
 }
@@ -126,8 +130,36 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 
 		else if (command == "end")
 		{
-			//check endgame
-			//reset booleans and int in this class
+			//reset booleans and int for next round
+			buildings_built_ = 0;
+			building_coins_used_ = false;
+			building_ = false;
+			
+			//Check if there is a next character
+			if(game.game_manager().get_character_order_queue_size() > 0)
+			{
+				game.client_manager().trigger_next_state("GameRoundState");
+			} else
+			{
+				//check endgame
+				if (game.client_manager().check_if_eight_buildings())
+				{
+					game.client_manager().trigger_next_state("GameEndState");
+				}
+				else
+				{
+					//choose next king
+					if(!king_killed_)
+					{
+						auto& current_king = game.client_manager().get_king();
+						current_king.get_player().king(false);
+						game.client_manager().get_next_client(player_id).get_player().king(true);
+					}
+					king_killed_ = false;
+					game.client_manager().trigger_next_state("SetupRoundState");
+				}
+			}
+
 		} else
 		{
 			game.client_manager().notify_player("unrecognized command, please try again", player_id);
@@ -136,27 +168,33 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 	{
 		try
 		{
-			BuildingCard& selected_card = option_map.find(std::stoi(command))->second;
-			if(current_player.coins() - selected_card.points() < 0)
+			if(option_map.find(std::stoi(command)) == option_map.end())
 			{
-				game.client_manager().notify_player("Sorry, you cannot build this building, the cost of this building is: " + 
-					std::to_string(selected_card.points()) + " and you have only " + 
+				throw std::exception();
+			} 
+			BuildingCard& selected_card = option_map.find(std::stoi(command))->second;
+			if (current_player.coins() - selected_card.points() < 0)
+			{
+				game.client_manager().notify_player("Sorry, you cannot build this building, the cost of this building is: " +
+					std::to_string(selected_card.points()) + " and you have only " +
 					std::to_string(current_player.coins()) + " coins \r\n", player_id);
-			} else
+
+				//TODO: go back
+			}
+			else
 			{
 				current_player.transfer_buildings_to_table(selected_card.name());
 				current_player.add_coins(selected_card.points() *-1);
-				game.client_manager().notify_player("Building " + selected_card.name() + "built! \r\n" + 
+				game.client_manager().notify_player("Building " + selected_card.name() + "built! \r\n" +
 					current_player.getInventoryInfo() + current_player.get_played_buildings_info(), player_id);
-			}			
+				building_ = false;
+				buildings_built_++;
+			}
 		}
 		catch (std::exception& ex)
 		{
 			game.client_manager().notify_player("\r\nYour input is not valid, please try a valid number.\r\n", player_id);
 		}
-
-		building_ = false;
-		buildings_built_++;
 	}
 }
 

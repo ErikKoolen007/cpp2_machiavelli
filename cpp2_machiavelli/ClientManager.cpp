@@ -66,6 +66,19 @@ ClientInfo& ClientManager::get_next_client(int current_client_id)
 		[&](std::shared_ptr<ClientInfo>& client){ return client->get_player().id() != current_client_id; });
 }
 
+bool ClientManager::check_if_eight_buildings()
+{
+	for (auto it = current_clients_.begin(); it != current_clients_.end(); ++it) {
+		auto& element = *it;
+
+		if (element->get_player().building_cards_on_table().size() == 8)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 void ClientManager::notify_all_players(std::string message)
 {
 	std::for_each(current_clients_.begin(), current_clients_.end(), [&](auto& client)
