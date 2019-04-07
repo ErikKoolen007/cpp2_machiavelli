@@ -62,9 +62,9 @@ std::shared_ptr<ClientInfo> Server::init_client_session(Socket client) {
 	while (!done) {
 		try
 		{
-		done = client.readline([&age](std::string input) {
-		age = std::stoi(input);
-		});
+			done = client.readline([&age](std::string input) {
+				age = std::stoi(input);
+			});
 		}
 		catch (std::exception& ex)
 		{
