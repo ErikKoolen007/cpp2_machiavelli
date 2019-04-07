@@ -49,6 +49,7 @@ void SetupRoundState::handle_input(Game& game, ClientInfo& client_info, const st
 
 void SetupRoundState::on_exit(Game& game)
 {
+	game.game_manager().load_character_order_queue();
 }
 
 std::string SetupRoundState::name()
