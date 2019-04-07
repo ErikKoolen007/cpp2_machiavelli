@@ -5,7 +5,7 @@ void GameRoundState::on_enter(Game& game)
 {
 	game.client_manager().notify_all_players("Successfully entered GameRoundState!\r\n");
 	std::unordered_map<int, int>& routing_table = game.client_manager().get_round_routing_table();
-	bool done = false;
+	setup_round_state_triggered_ = false;
 
 	character_id = game.game_manager().get_character_order_queue().front();
 
@@ -20,51 +20,54 @@ void GameRoundState::on_enter(Game& game)
 
 		end_turn(game);
 	}
-	
-	Player& current_player = game.client_manager().get_client(player_id).get_player();
-	std::shared_ptr<CharacterCard>& current_character = current_player.character_card(character_id);
 
-	//lock all the clients (it is possible that one of them is not locked at this stage
-	game.client_manager().lock_all_clients();
-	//check dead
-	 if(!current_character->dead())
-	 {
-		 //check robbed
-		if(current_character->robbed())
+	if (!setup_round_state_triggered_) {
+		Player& current_player = game.client_manager().get_client(player_id).get_player();
+		std::shared_ptr<CharacterCard>& current_character = current_player.character_card(character_id);
+
+		//lock all the clients (it is possible that one of them is not locked at this stage
+		game.client_manager().lock_all_clients();
+		//check dead
+		if (!current_character->dead())
 		{
-			Player& robber = game.client_manager().get_client(current_character->robbed_by()).get_player();
-			int amount = current_player.coins();
-			current_player.coins(0);
-			robber.add_coins(amount);
-			game.client_manager().notify_player("Oi, you got robbed! " + 
-				std::to_string(amount) + " (all) of your coins has been transferred to " + robber.get_name() + "\r\n", player_id);
-		}
+			//check robbed
+			if (current_character->robbed())
+			{
+				Player& robber = game.client_manager().get_client(current_character->robbed_by()).get_player();
+				int amount = current_player.coins();
+				current_player.coins(0);
+				robber.add_coins(amount);
+				game.client_manager().notify_player("Oi, you got robbed! " +
+					std::to_string(amount) + " (all) of your coins has been transferred to " + robber.get_name() + "\r\n", player_id);
+			}
 
-		//check merchant
-		if(current_character->name() == "Koopman")
+			//check merchant
+			if (current_character->name() == "Koopman")
+			{
+				current_player.add_coins(1);
+			}
+
+			//give the player his information
+			game.client_manager().notify_player(
+				current_player.get_character_info() +
+				current_player.getInventoryInfo() + "\r\n" +
+				current_player.get_played_buildings_info() + "\r\n\r\n" +
+				"This turn you play for the " + current_character->name() + "\r\n\r\n" +
+				generate_options_msg(current_character), player_id);
+
+			//expect player input from here
+			game.client_manager().lock_client(player_id, false);
+		}
+		else
 		{
-			current_player.add_coins(1);
+			if (current_character->name() == "Koning")
+			{
+				king_killed_ = true;
+			}
+			game.client_manager().notify_player("Oi boi, you have been assassinated, you are skipping a turn now... \r\n", player_id);
+			end_turn(game);
 		}
-
-		 //give the player his information
-		game.client_manager().notify_player(
-			current_player.get_character_info() +
-			current_player.getInventoryInfo() + "\r\n" +
-			current_player.get_played_buildings_info() + "\r\n\r\n" +
-			"This turn you play for the " + current_character->name() +  "\r\n\r\n" +
-			generate_options_msg(current_character), player_id);
-
-		 //expect player input from here
-		game.client_manager().lock_client(player_id, false);
-	 } else
-	 {
-		 if(current_character->name() == "Koning")
-		 {
-			 king_killed_ = true;
-		 }
-		 game.client_manager().notify_player("Oi boi, you have been assassinated, you are skipping a turn now... \r\n", player_id);
-		 end_turn(game);
-	 }
+	}
 }
 
 void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std::string& command)
@@ -272,6 +275,7 @@ void GameRoundState::end_turn(Game& game)
 			}
 			king_killed_ = false;
 			game.client_manager().trigger_next_state("SetupRoundState");
+			setup_round_state_triggered_ = true;
 		}
 	}
 }

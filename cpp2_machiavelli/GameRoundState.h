@@ -23,6 +23,7 @@ private:
 	bool king_killed_ = false;
 	int player_id = 999;
 	int character_id = 999;
+	bool setup_round_state_triggered_ = false;
 	void end_turn(Game& game);
 };
 
