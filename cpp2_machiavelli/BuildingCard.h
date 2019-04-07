@@ -24,7 +24,7 @@ public:
 	void description(const std::string & d) { description_ = d; }
 
 	void special_power();
-	std::string to_string();
+	std::string to_string() const;
 	std::string writeToConsole() const override;
 	void readFromConsole(std::vector<std::string>&) override;
 private:
