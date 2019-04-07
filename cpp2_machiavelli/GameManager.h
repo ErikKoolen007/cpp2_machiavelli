@@ -26,12 +26,12 @@ public:
 	int building_card_deck_size() const { return building_card_deck_.size(); }
 	int character_card_deck_size() const { return character_card_deck_.size(); }
 	std::queue<int>& get_character_order_queue() { return character_order_queue_; }
+	void load_character_order_queue();
 private:
 	StateMachine<Game>& state_machine_;
 	FileReader file_reader_;
 	std::deque<BuildingCard> building_card_deck_;
 	std::deque<std::unique_ptr<CharacterCard>> character_card_deck_;
 	std::queue<int> character_order_queue_;
-	void load_character_order_queue();
 };
 
