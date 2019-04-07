@@ -3,22 +3,13 @@
 
 void GameRoundState::on_enter(Game& game)
 {
-	//Check whether the character is dead -> if so, skip to the next character
-		//Check whether the character has been robbed -> if so, give all his money to the robbed_by player
-		//check boolean to see if player has chosen coins or buildingcards already -> kan ik niet vinden?
-			//give options accordingly
-				//-choose coins or cards
-				//-show round specific choices
-					//Check whether character used his special ability
-					//Show special ability option if not
 	game.client_manager().notify_all_players("Successfully entered GameRoundState!");
 	std::unordered_map<int, int>& routing_table = game.client_manager().get_round_routing_table();
 
 	int character_id = game.game_manager().pop_character_order_queue();
 	int player_id = routing_table.find(character_id)->second;
-
-	auto current_player = game.client_manager().get_client(player_id).get_player();
-	auto current_character = current_player.character_card(character_id);
+	Player& current_player = game.client_manager().get_client(player_id).get_player();
+	std::shared_ptr<CharacterCard>& current_character = current_player.character_card(character_id);
 
 	//check dead
 	 if(!current_character->dead())
@@ -33,15 +24,13 @@ void GameRoundState::on_enter(Game& game)
 			game.client_manager().notify_player("Oi, you got robbed! " + 
 				std::to_string(amount) + " (all) of your coins has been transferred to " + robber.get_name() + "\r\n", player_id);
 		}
-
-		 //show option buildings/coins
+		 //give the player his information
 		game.client_manager().notify_player(
-			current_player.get_character_info() + "\r\n\rn" 
-			+ current_player.getInventoryInfo() + 
-			"\r\n\r\n Do you want to have 'buildings' or 'coins'?\r\n", player_id);
+			current_player.get_character_info() +
+			current_player.getInventoryInfo() + "\r\n" +
+			generate_options_msg(current_character), player_id);
 
 		 //expect player input from here
-		building_coin_input = true;
 	 } else
 	 {
 		 game.client_manager().notify_player("Oi boi, you have been assassinated, you are skipping a turn now... \r\n", player_id);
@@ -55,6 +44,11 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 
 	//last player triggers setupround state/gameendstate -> check if game is won
 	//lock the right player if the player ends his turn(lock logic is used to get currentclient in the character states)
+
+	if (command == "end")
+	{
+		
+	}
 }
 
 void GameRoundState::on_exit(Game& game)
@@ -64,4 +58,28 @@ void GameRoundState::on_exit(Game& game)
 std::string GameRoundState::name()
 {
 	return "GameRoundState";
+}
+
+std::string GameRoundState::generate_options_msg(std::shared_ptr<CharacterCard>& current_character)
+{
+	std::string console_msg = "";
+
+	if(!building_coins_used)
+	{
+		console_msg = console_msg + "Choose if you want 'coins' or a 'building card'\r\n";
+	}
+
+	if((current_character->name() != "Bouwmeester" && buildings_built < 1) || 
+		(current_character->name() == "Bouwmeester" && buildings_built < 3))
+	{
+		console_msg = console_msg + "Or choose if you want 'build' a building\r\n";
+	}
+
+	if(!current_character->special_used())
+	{
+		console_msg = console_msg + "Or choose if you want to use your 'special power' \r\n";
+	}
+
+	console_msg = console_msg + "Or end your turn by typing 'end turn'\r\n";
+	return console_msg;
 }

@@ -12,6 +12,9 @@ public:
 	void on_exit(Game& game) override;
 	std::string name() override;
 private:
-	bool building_coin_input = false;
+	std::string generate_options_msg(
+		std::shared_ptr<CharacterCard>& current_character);
+	int buildings_built = 0;
+	bool building_coins_used = false;
 };
 
