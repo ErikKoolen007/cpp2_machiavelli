@@ -11,5 +11,8 @@ public:
 	void handle_input(Game& game, ClientInfo& client, const std::string& command) override;
 	void on_exit(Game& game) override;
 	std::string name() override;
+
+private:
+	bool sub_menu_{ false };
 };
 

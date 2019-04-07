@@ -27,6 +27,7 @@ public:
 
 	std::vector<BuildingCard>& building_cards() { return buildings_;  }
 	void add_building(BuildingCard building) { buildings_.push_back(building); }
+	void remove_hand_buildings(int amount);
 
 	std::vector<BuildingCard>& building_cards_on_table() { return buildings_on_table_; }
 	void add_building_to_table(BuildingCard building) { buildings_on_table_.push_back(building); }

@@ -71,10 +71,14 @@ void CondottiereState::handle_input(Game& game, ClientInfo& client, const std::s
 		if(option_id <= building_option_count_)
 		{
 			ClientInfo& other_client = game.client_manager().get_next_client(player.id());
-			const std::string destroyed_building = other_client.get_player().building_cards_on_table()[option_map_[option_id]].to_string();
+			BuildingCard& destroyed_building = other_client.get_player().building_cards_on_table()[option_map_[option_id]];
 
-			game.client_manager().notify_all_players("The Condottiere destroyed the " + destroyed_building + "from: " + 
+			//Pay for the destruction of the building and notify the players
+			player.add_coins(-(destroyed_building.points() - 1));
+			game.client_manager().notify_all_players("The Condottiere destroyed the " + destroyed_building.to_string() + "from: " + 
 				other_client.get_player().get_name() + "!\r\n");
+
+			//Destroy the building and return to the game
 			other_client.get_player().destroy_building(option_map_[option_id]);
 			game.state_machine().change_state("GameRoundState");
 		}

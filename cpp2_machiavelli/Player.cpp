@@ -9,6 +9,12 @@
 #include "Player.h"
 #include <algorithm>
 
+void Player::remove_hand_buildings(int amount)
+{
+	if (amount > 0 && static_cast<unsigned>(amount) <= building_cards().size())
+		building_cards().erase(building_cards().begin(), building_cards().begin() + amount);
+}
+
 void Player::destroy_building(int index)
 {
 	if(building_cards_on_table().size() > static_cast<unsigned>(index) && index >= 0)
