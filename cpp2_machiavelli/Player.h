@@ -29,7 +29,7 @@ public:
 	void add_building(BuildingCard building) { buildings_.push_back(building); }
 
 	std::vector<BuildingCard>& building_cards_on_table() { return buildings_on_table_; }
-	void add_building_to_table(BuildingCard building) { buildings_on_table_.push_back(building); }
+	void transfer_buildings_to_table(std::string building_name);
 
 	std::vector<std::shared_ptr<CharacterCard>>& character_cards() { return characters_; }
 	std::shared_ptr<CharacterCard>& character_card(int character_id);
@@ -39,6 +39,7 @@ public:
 	std::string getInventoryInfo();
 	std::string get_character_info();
 	std::string get_played_buildings_info();
+	std::string get_building_info();
 
 
 private:
@@ -51,5 +52,4 @@ private:
 	std::vector<BuildingCard> buildings_;
 	std::vector<BuildingCard> buildings_on_table_;
 	std::vector<std::shared_ptr<CharacterCard>> characters_;
-	std::string get_building_info();
 };

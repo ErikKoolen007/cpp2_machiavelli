@@ -9,6 +9,19 @@
 #include "Player.h"
 #include <algorithm>
 
+void Player::transfer_buildings_to_table(std::string building_name)
+{
+	for (auto it = building_cards().begin(); it != building_cards().end(); ++it) {
+		BuildingCard& element = *it;
+
+		if (element.name() == building_name)
+		{
+			building_cards_on_table().push_back(element);
+			building_cards().erase(it);
+		}
+	}
+}
+
 std::shared_ptr<CharacterCard>& Player::character_card(int character_id)
 {
 	return *std::find_if(characters_.begin(), characters_.end(), 
