@@ -39,6 +39,7 @@ public:
 	void remove_hand_buildings(int amount);
 
 	std::vector<BuildingCard>& building_cards_on_table() { return buildings_on_table_; }
+	void transfer_buildings_to_table(std::string building_name);
 	void add_building_to_table(BuildingCard building) { buildings_on_table_.push_back(building); }
 	void destroy_building(int index);
 
@@ -50,6 +51,8 @@ public:
 
 	std::string getInventoryInfo();
 	std::string get_character_info();
+	std::string get_played_buildings_info();
+	std::string get_building_info();
 
 
 private:
@@ -64,5 +67,4 @@ private:
 	std::vector<BuildingCard> buildings_;
 	std::vector<BuildingCard> buildings_on_table_;
 	std::vector<std::shared_ptr<CharacterCard>> characters_;
-	std::string get_building_info();
 };
