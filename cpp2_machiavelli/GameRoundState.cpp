@@ -5,10 +5,25 @@ void GameRoundState::on_enter(Game& game)
 {
 	game.client_manager().notify_all_players("Successfully entered GameRoundState!\r\n");
 	std::unordered_map<int, int>& routing_table = game.client_manager().get_round_routing_table();
+	bool done = false;
 
 	game.game_manager().load_character_order_queue();
 	character_id = game.game_manager().get_character_order_queue().front();
-	player_id = routing_table.find(character_id)->second;
+
+	while (!done) {
+		if (routing_table.count(character_id))
+		{
+			player_id = routing_table.find(character_id)->second;
+			done = true;
+		}
+		else
+		{
+			game.client_manager().notify_all_players("The King called for the " + game.character_manager().get_name_by_id(character_id)
+				+ " but none answered.\r\n");
+			character_id = game.game_manager().pop_character_order_queue();
+		}
+	}
+	
 	Player& current_player = game.client_manager().get_client(player_id).get_player();
 	std::shared_ptr<CharacterCard>& current_character = current_player.character_card(character_id);
 
