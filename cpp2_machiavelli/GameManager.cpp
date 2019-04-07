@@ -14,6 +14,33 @@ void GameManager::load_character_deque()
 	Utilities::shuffle_character_deck(character_card_deck_);
 }
 
+void GameManager::load_character_order_queue()
+{
+	//4 -3 -2 - 1 - 5 - 6 - 7 - 8
+	if(character_order_queue_.empty())
+	{
+		character_order_queue_.push(4);
+		character_order_queue_.push(1);
+		character_order_queue_.push(2);
+		character_order_queue_.push(3);
+		character_order_queue_.push(5);
+		character_order_queue_.push(6);
+		character_order_queue_.push(7);
+		character_order_queue_.push(8);
+	}
+}
+
+int GameManager::pop_character_order_queue()
+{
+	if(character_order_queue_.empty())
+	{
+		load_character_order_queue();
+	}
+	int character_id = character_order_queue_.front();
+	character_order_queue_.pop();
+	return character_id;
+}
+
 BuildingCard GameManager::get_top_building_card()
 {
 	BuildingCard building_card = building_card_deck_.front();
