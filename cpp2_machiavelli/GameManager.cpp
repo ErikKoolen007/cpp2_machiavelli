@@ -17,17 +17,14 @@ void GameManager::load_character_deque()
 void GameManager::load_character_order_queue()
 {
 	//4 -3 -2 - 1 - 5 - 6 - 7 - 8
-	if(character_order_queue_.empty())
-	{
-		character_order_queue_.push(4);
-		character_order_queue_.push(1);
-		character_order_queue_.push(2);
-		character_order_queue_.push(3);
-		character_order_queue_.push(5);
-		character_order_queue_.push(6);
-		character_order_queue_.push(7);
-		character_order_queue_.push(8);
-	}
+	character_order_queue_.push(4);
+	character_order_queue_.push(1);
+	character_order_queue_.push(2);
+	character_order_queue_.push(3);
+	character_order_queue_.push(5);
+	character_order_queue_.push(6);
+	character_order_queue_.push(7);
+	character_order_queue_.push(8);
 }
 
 int GameManager::pop_character_order_queue()
