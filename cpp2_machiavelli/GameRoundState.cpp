@@ -105,6 +105,7 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 		}
 		else if (command == "building card")
 		{
+			building_coins_used_ = true;
 			current_player.add_building(game.game_manager().get_top_building_card());
 			game.client_manager().notify_player("\r\n a building card has been added to your inventory, you now have the following building cards in your hand:\r\n " +
 				current_player.get_building_info() + "\r\n\r\n" + generate_options_msg(current_character), player_id);
@@ -120,7 +121,6 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 
 		else if (command == "help")
 		{
-			building_coins_used_ = true;
 			game.client_manager().notify_player(generate_help_msg(), player_id);
 		}
 
@@ -137,8 +137,18 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 		try
 		{
 			BuildingCard& selected_card = option_map.find(std::stoi(command))->second;
-			current_player.transfer_buildings_to_table(selected_card.name());
-			//TODO: inform the player that a building card got transferred from his hand to the table and check if anything more needs to be done for "building" a building 
+			if(current_player.coins() - selected_card.points() < 0)
+			{
+				game.client_manager().notify_player("Sorry, you cannot build this building, the cost of this building is: " + 
+					std::to_string(selected_card.points()) + " and you have only " + 
+					std::to_string(current_player.coins()) + " coins \r\n", player_id);
+			} else
+			{
+				current_player.transfer_buildings_to_table(selected_card.name());
+				current_player.add_coins(selected_card.points() *-1);
+				game.client_manager().notify_player("Building " + selected_card.name() + "built! \r\n" + 
+					current_player.getInventoryInfo() + current_player.get_played_buildings_info(), player_id);
+			}			
 		}
 		catch (std::exception& ex)
 		{
