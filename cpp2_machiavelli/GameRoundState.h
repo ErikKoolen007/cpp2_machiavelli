@@ -16,6 +16,7 @@ private:
 		std::shared_ptr<CharacterCard>& current_character);
 	std::string generate_help_msg();
 	void handle_build_building();
+	std::unordered_map<int, BuildingCard&> option_map_;
 	int buildings_built_ = 0;
 	bool building_coins_used_ = false;
 	bool building_ = false;

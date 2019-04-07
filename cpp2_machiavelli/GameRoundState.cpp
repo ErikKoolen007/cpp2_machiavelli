@@ -55,131 +55,132 @@ void GameRoundState::on_enter(Game& game)
 
 void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std::string& command)
 {
-	std::unordered_map<int, BuildingCard&> option_map;
 	Player& current_player = game.client_manager().get_client(player_id).get_player();
 	std::shared_ptr<CharacterCard>& current_character = current_player.character_card(character_id);
 
-	if(!building_)
+
+	if (command == "build" && !building_)
 	{
-		if (command == "build")
+		building_ = true;
+		int i = 1;
+		std::string option_msg = "";
+		std::for_each(current_player.building_cards().begin(), current_player.building_cards().end(), [&](BuildingCard& option)
 		{
-			building_ = true;
-			int i = 1;
-			std::string option_msg = "";
-			std::for_each(current_player.building_cards().begin(), current_player.building_cards().end(), [&](BuildingCard& option)
-			{
-				option_map.insert({i, option});
-				option_msg = option_msg + "[" + std::to_string(i) + "] " + option.name() + "\r\n";
-				i++;
-			});
+			option_map_.insert({i, option});
+			option_msg = option_msg + "[" + std::to_string(i) + "] " + option.name() + "\r\n";
+			i++;
+		});
 
-			game.client_manager().notify_player(std::string("Which building do you want to build? Please type the number of the card \r\n") +
-				option_msg, player_id);
+		game.client_manager().notify_player(std::string("Which building do you want to build? Please type the number of the card \r\n") +
+			option_msg, player_id);
+	}
+
+	else if (command == "special power" && !building_)
+	{
+		switch (character_id) {
+		case 1:
+			game.client_manager().trigger_next_state("AssassinState");
+			break;
+		case 2:
+			game.client_manager().trigger_next_state("ThiefState");
+			break;
+		case 3:
+			game.client_manager().trigger_next_state("MageState");
+			break;
+		case 4:
+			game.client_manager().trigger_next_state("KingState");
+			break;
+		case 5:
+			game.client_manager().trigger_next_state("MageState");
+			break;
+		case 6:
+			game.client_manager().trigger_next_state("MerchantState");
+			break;
+		case 7:
+			game.client_manager().trigger_next_state("BuilderState");
+			break;
+		case 8:
+			game.client_manager().trigger_next_state("CondotierreState");
+			break;
+		default:;
 		}
+	}
+	else if (command == "building card" && !building_)
+	{
+		building_coins_used_ = true;
+		current_player.add_building(game.game_manager().get_top_building_card());
+		game.client_manager().notify_player("\r\n a building card has been added to your inventory, you now have the following building cards in your hand:\r\n " +
+			current_player.get_building_info() + "\r\n\r\n" + generate_options_msg(current_character), player_id);
+	}
 
-		else if (command == "special power")
-		{
-			switch (character_id) {
-			case 1:
-				game.client_manager().trigger_next_state("AssassinState");
-				break;
-			case 2:
-				game.client_manager().trigger_next_state("ThiefState");
-				break;
-			case 3:
-				game.client_manager().trigger_next_state("MageState");
-				break;
-			case 4:
-				game.client_manager().trigger_next_state("KingState");
-				break;
-			case 5:
-				game.client_manager().trigger_next_state("MageState");
-				break;
-			case 6:
-				game.client_manager().trigger_next_state("MerchantState");
-				break;
-			case 7:
-				game.client_manager().trigger_next_state("BuilderState");
-				break;
-			case 8:
-				game.client_manager().trigger_next_state("CondotierreState");
-				break;
-			default:;
-			}
-		}
-		else if (command == "building card")
-		{
-			building_coins_used_ = true;
-			current_player.add_building(game.game_manager().get_top_building_card());
-			game.client_manager().notify_player("\r\n a building card has been added to your inventory, you now have the following building cards in your hand:\r\n " +
-				current_player.get_building_info() + "\r\n\r\n" + generate_options_msg(current_character), player_id);
-		}
+	else if (command == "coins" && !building_)
+	{
+		building_coins_used_ = true;
+		current_player.add_coins(2);
+		game.client_manager().notify_player("\r\n2 coins have been added, You now have " + 
+			std::to_string(current_player.coins()) + " coins \r\n\r\n" + generate_options_msg(current_character), player_id);
+	}
 
-		else if (command == "coins")
-		{
-			building_coins_used_ = true;
-			current_player.add_coins(2);
-			game.client_manager().notify_player("\r\n2 coins have been added, You now have " + 
-				std::to_string(current_player.coins()) + " coins \r\n\r\n" + generate_options_msg(current_character), player_id);
-		}
+	else if (command == "help" && !building_)
+	{
+		game.client_manager().notify_player(generate_help_msg(), player_id);
+	}
 
-		else if (command == "help")
-		{
-			game.client_manager().notify_player(generate_help_msg(), player_id);
-		}
+	else if (command == "back" && building_)
+	{
+		building_ = false;
+		game.client_manager().notify_player(generate_options_msg(current_character), player_id);
+	}
 
-		else if (command == "end")
+	else if (command == "end" && !building_)
+	{
+		//reset booleans and int for next round
+		buildings_built_ = 0;
+		building_coins_used_ = false;
+		building_ = false;
+		option_map_.clear();
+		
+		//Check if there is a next character
+		if(game.game_manager().get_character_order_queue_size() > 0)
 		{
-			//reset booleans and int for next round
-			buildings_built_ = 0;
-			building_coins_used_ = false;
-			building_ = false;
-			
-			//Check if there is a next character
-			if(game.game_manager().get_character_order_queue_size() > 0)
-			{
-				game.client_manager().trigger_next_state("GameRoundState");
-			} else
-			{
-				//check endgame
-				if (game.client_manager().check_if_eight_buildings())
-				{
-					game.client_manager().trigger_next_state("GameEndState");
-				}
-				else
-				{
-					//choose next king
-					if(!king_killed_)
-					{
-						auto& current_king = game.client_manager().get_king();
-						current_king.get_player().king(false);
-						game.client_manager().get_next_client(player_id).get_player().king(true);
-					}
-					king_killed_ = false;
-					game.client_manager().trigger_next_state("SetupRoundState");
-				}
-			}
-
+			game.client_manager().trigger_next_state("GameRoundState");
 		} else
 		{
-			game.client_manager().notify_player("unrecognized command, please try again", player_id);
+			//check endgame
+			if (game.client_manager().check_if_eight_buildings())
+			{
+				game.client_manager().trigger_next_state("GameEndState");
+			}
+			else
+			{
+				//choose next king
+				if(!king_killed_)
+				{
+					auto& current_king = game.client_manager().get_king();
+					current_king.get_player().king(false);
+					game.client_manager().get_next_client(player_id).get_player().king(true);
+				}
+				king_killed_ = false;
+				game.client_manager().trigger_next_state("SetupRoundState");
+			}
 		}
-	} else
+
+	} 
+	
+	else if(building_)
 	{
 		try
 		{
-			if(option_map.find(std::stoi(command)) == option_map.end())
+			if (option_map_.find(std::stoi(command)) == option_map_.end())
 			{
 				throw std::exception();
-			} 
-			BuildingCard& selected_card = option_map.find(std::stoi(command))->second;
+			}
+			BuildingCard selected_card = option_map_.find(std::stoi(command))->second;
 			if (current_player.coins() - selected_card.points() < 0)
 			{
 				game.client_manager().notify_player("Sorry, you cannot build this building, the cost of this building is: " +
 					std::to_string(selected_card.points()) + " and you have only " +
-					std::to_string(current_player.coins()) + " coins \r\n", player_id);
-
-				//TODO: go back
+					std::to_string(current_player.coins()) + " coins. Go back by typing 'back' \r\n", player_id);
 			}
 			else
 			{
@@ -195,6 +196,10 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 		{
 			game.client_manager().notify_player("\r\nYour input is not valid, please try a valid number.\r\n", player_id);
 		}
+	}
+	else
+	{
+		game.client_manager().notify_player("unrecognized command, please try again", player_id);
 	}
 }
 
