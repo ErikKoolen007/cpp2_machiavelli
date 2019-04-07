@@ -5,23 +5,15 @@ void GameRoundState::on_enter(Game& game)
 {
 	game.client_manager().notify_all_players("Successfully entered GameRoundState!\r\n");
 	std::unordered_map<int, int>& routing_table = game.client_manager().get_round_routing_table();
-	setup_round_state_triggered_ = false;
+	bool done = false;
 
 	character_id = game.game_manager().get_character_order_queue().front();
 
 	if (routing_table.count(character_id))
 	{
 		player_id = routing_table.find(character_id)->second;
-	}
-	else
-	{
-		game.client_manager().notify_all_players("The King called for the " + game.character_manager().get_name_by_id(character_id)
-			+ " but none answered.\r\n");
 
-		end_turn(game);
-	}
-
-	if (!setup_round_state_triggered_) {
+		//added from here
 		Player& current_player = game.client_manager().get_client(player_id).get_player();
 		std::shared_ptr<CharacterCard>& current_character = current_player.character_card(character_id);
 
@@ -67,6 +59,13 @@ void GameRoundState::on_enter(Game& game)
 			game.client_manager().notify_player("Oi boi, you have been assassinated, you are skipping a turn now... \r\n", player_id);
 			end_turn(game);
 		}
+	}
+	else
+	{
+		game.client_manager().notify_all_players("The King called for the " + game.character_manager().get_name_by_id(character_id)
+			+ " but none answered.\r\n");
+
+		end_turn(game);
 	}
 }
 
@@ -275,7 +274,6 @@ void GameRoundState::end_turn(Game& game)
 			}
 			king_killed_ = false;
 			game.client_manager().trigger_next_state("SetupRoundState");
-			setup_round_state_triggered_ = true;
 		}
 	}
 }
