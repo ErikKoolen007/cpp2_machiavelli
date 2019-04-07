@@ -30,6 +30,7 @@ void Player::transfer_buildings_to_table(std::string building_name)
 		{
 			building_cards_on_table().push_back(element);
 			building_cards().erase(it);
+			break;
 		}
 	}
 }
