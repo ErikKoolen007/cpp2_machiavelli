@@ -7,7 +7,6 @@ void GameRoundState::on_enter(Game& game)
 	std::unordered_map<int, int>& routing_table = game.client_manager().get_round_routing_table();
 	bool done = false;
 
-	game.game_manager().load_character_order_queue();
 	character_id = game.game_manager().get_character_order_queue().front();
 
 	while (!done) {
@@ -20,7 +19,9 @@ void GameRoundState::on_enter(Game& game)
 		{
 			game.client_manager().notify_all_players("The King called for the " + game.character_manager().get_name_by_id(character_id)
 				+ " but none answered.\r\n");
-			character_id = game.game_manager().pop_character_order_queue();
+
+			game.game_manager().pop_character_order_queue();
+			character_id = game.game_manager().get_character_order_queue().front();
 		}
 	}
 	
