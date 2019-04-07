@@ -135,3 +135,8 @@ std::unordered_map<int, int>& ClientManager::get_round_routing_table()
 	}
 	return routing_table_;
 }
+
+void ClientManager::clear_round_routing_table()
+{
+	routing_table_.clear();
+}

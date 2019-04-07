@@ -248,6 +248,7 @@ void GameRoundState::end_turn(Game& game)
 	building_coins_used_ = false;
 	building_ = false;
 	option_map_.clear();
+	game.client_manager().clear_round_routing_table();
 
 	//Check if there is a next character
 	if (game.game_manager().get_character_order_queue_size() > 1)
