@@ -38,6 +38,7 @@ public:
 
 	std::string getInventoryInfo();
 	std::string get_character_info();
+	std::string get_played_buildings_info();
 
 
 private:

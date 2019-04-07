@@ -14,7 +14,9 @@ public:
 private:
 	std::string generate_options_msg(
 		std::shared_ptr<CharacterCard>& current_character);
-	int buildings_built = 0;
-	bool building_coins_used = false;
+	std::string generate_help_msg();
+	int buildings_built_ = 0;
+	bool building_coins_used_ = false;
+	int current_player_id_ = 999;
 };
 
