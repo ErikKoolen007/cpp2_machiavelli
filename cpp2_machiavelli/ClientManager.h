@@ -27,11 +27,12 @@ public:
 	void lock_all_clients();
 	void trigger_next_state(std::string new_state);
 	void clear_characters_of_players();
-	std::map<int, int> get_round_routing_table();
+	std::unordered_map<int, int>& get_round_routing_table();
 
 private:
 	StateMachine<Game>& state_machine_;
 	std::vector<std::shared_ptr<ClientInfo>> current_clients_;
+	std::unordered_map<int, int> routing_table_;
 	int last_player_id_ = 0;
 };
 
