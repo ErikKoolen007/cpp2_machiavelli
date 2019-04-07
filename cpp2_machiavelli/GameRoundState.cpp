@@ -6,7 +6,7 @@ void GameRoundState::on_enter(Game& game)
 	game.client_manager().notify_all_players("Successfully entered GameRoundState!\r\n");
 	std::unordered_map<int, int>& routing_table = game.client_manager().get_round_routing_table();
 
-	character_id = game.game_manager().pop_character_order_queue();
+	character_id = game.game_manager().get_character_order_queue().front();
 	player_id = routing_table.find(character_id)->second;
 	Player& current_player = game.client_manager().get_client(player_id).get_player();
 	std::shared_ptr<CharacterCard>& current_character = current_player.character_card(character_id);
@@ -50,6 +50,7 @@ void GameRoundState::on_enter(Game& game)
 			 king_killed_ = true;
 		 }
 		 game.client_manager().notify_player("Oi boi, you have been assassinated, you are skipping a turn now... \r\n", player_id);
+		 end_turn(game);
 	 }
 }
 
@@ -134,37 +135,7 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 
 	else if (command == "end" && !building_)
 	{
-		//reset booleans and int for next round
-		buildings_built_ = 0;
-		building_coins_used_ = false;
-		building_ = false;
-		option_map_.clear();
-		
-		//Check if there is a next character
-		if(game.game_manager().get_character_order_queue_size() > 0)
-		{
-			game.client_manager().trigger_next_state("GameRoundState");
-		} else
-		{
-			//check endgame
-			if (game.client_manager().check_if_eight_buildings())
-			{
-				game.client_manager().trigger_next_state("GameEndState");
-			}
-			else
-			{
-				//choose next king
-				if(!king_killed_)
-				{
-					auto& current_king = game.client_manager().get_king();
-					current_king.get_player().king(false);
-					game.client_manager().get_next_client(player_id).get_player().king(true);
-				}
-				king_killed_ = false;
-				game.client_manager().trigger_next_state("SetupRoundState");
-			}
-		}
-
+		end_turn(game);
 	} 
 	
 	else if(building_)
@@ -252,4 +223,40 @@ std::string GameRoundState::generate_help_msg()
 void GameRoundState::handle_build_building()
 {
 
+}
+
+void GameRoundState::end_turn(Game& game)
+{
+	//reset booleans and int for next round
+	buildings_built_ = 0;
+	building_coins_used_ = false;
+	building_ = false;
+	option_map_.clear();
+
+	//Check if there is a next character
+	if (game.game_manager().get_character_order_queue_size() > 1)
+	{
+		game.game_manager().pop_character_order_queue();
+		game.client_manager().trigger_next_state("GameRoundState");
+	}
+	else
+	{
+		//check endgame
+		if (game.client_manager().check_if_eight_buildings())
+		{
+			game.client_manager().trigger_next_state("GameEndState");
+		}
+		else
+		{
+			//choose next king
+			if (!king_killed_)
+			{
+				auto& current_king = game.client_manager().get_king();
+				current_king.get_player().king(false);
+				game.client_manager().get_next_client(player_id).get_player().king(true);
+			}
+			king_killed_ = false;
+			game.client_manager().trigger_next_state("SetupRoundState");
+		}
+	}
 }

@@ -25,7 +25,7 @@ public:
 	std::string get_character_card_info();
 	int building_card_deck_size() const { return building_card_deck_.size(); }
 	int character_card_deck_size() const { return character_card_deck_.size(); }
-
+	std::queue<int>& get_character_order_queue() { return character_order_queue_; }
 private:
 	StateMachine<Game>& state_machine_;
 	FileReader file_reader_;
