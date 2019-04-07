@@ -107,7 +107,7 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 			game.client_manager().trigger_next_state("KingState");
 			break;
 		case 5:
-			game.client_manager().trigger_next_state("MageState");
+			game.client_manager().trigger_next_state("PreacherState");
 			break;
 		case 6:
 			game.client_manager().trigger_next_state("MerchantState");
