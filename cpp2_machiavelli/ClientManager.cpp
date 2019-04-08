@@ -140,3 +140,11 @@ void ClientManager::clear_round_routing_table()
 {
 	routing_table_.clear();
 }
+
+void ClientManager::reset_players()
+{
+	std::for_each(current_clients_.begin(), current_clients_.end(), [&](std::shared_ptr<ClientInfo>& client_ptr)
+	{
+		client_ptr->get_player().reset();
+	});
+}

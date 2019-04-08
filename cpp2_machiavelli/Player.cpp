@@ -89,6 +89,18 @@ std::string Player::get_building_info()
 	return return_string;
 }
 
+void Player::reset()
+{
+	points_ = 0;
+	building_card_points_ = 0;
+	coins_ = 0;
+	king_ = false;
+	first_full_city_ = false;
+	buildings_.clear();
+	buildings_on_table_.clear();
+	characters_.clear();
+}
+
 std::string Player::get_played_buildings_info()
 {
 	std::string return_string = "\r\nYou have played the following buildings: \r\n";

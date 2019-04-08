@@ -83,7 +83,7 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 		std::for_each(current_player.building_cards().begin(), current_player.building_cards().end(), [&](BuildingCard& option)
 		{
 			option_map_.insert({i, option});
-			option_msg = option_msg + "[" + std::to_string(i) + "] " + option.name() + "\r\n";
+			option_msg = option_msg + "[" + std::to_string(i) + "] " + option.to_string() + "\r\n";
 			i++;
 		});
 

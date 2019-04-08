@@ -91,6 +91,7 @@ void GameEndState::handle_input(Game& game, ClientInfo& client_info, const std::
 
 void GameEndState::on_exit(Game& game)
 {
+	game.client_manager().reset_players();
 }
 
 std::string GameEndState::name()

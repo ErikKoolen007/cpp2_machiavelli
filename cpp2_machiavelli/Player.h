@@ -54,6 +54,7 @@ public:
 	std::string get_played_buildings_info();
 	std::string get_building_info();
 
+	void reset();
 
 private:
     std::string name;
