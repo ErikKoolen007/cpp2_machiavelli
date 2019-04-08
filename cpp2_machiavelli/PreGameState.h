@@ -10,6 +10,6 @@ public:
 	void handle_input(Game& game, ClientInfo& client_info, const std::string& command) override;
 	void on_exit(Game& game) override;
 	std::string name() override;
-	void add_starting_resources(Game& game);
+	void add_starting_resources(Game& game) const;
 };
 

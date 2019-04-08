@@ -4,7 +4,7 @@
 class Condottiere : public CharacterCard
 {
 public:
-	Condottiere(int id, std::string name) : CharacterCard(id, name)
+	Condottiere(const int id, const std::string name) : CharacterCard(id, name)
 	{
 	}
 };

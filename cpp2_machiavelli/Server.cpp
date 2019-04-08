@@ -41,14 +41,15 @@ void Server::consume_command() // runs in its own thread
 	}
 }
 
-std::shared_ptr<ClientInfo> Server::init_client_session(Socket client) {
+std::shared_ptr<ClientInfo> Server::init_client_session(Socket client) const
+{
 	client.write("Welcome to Server 1.0! To quit, type 'quit'.\r\n");
 	client.write("What's your name?\r\n");
 	client.write(prompt_);
 	std::string name;
 	bool done{ false };
 	while (!done) {
-		done = client.readline([&name](std::string input) {
+		done = client.readline([&name](const std::string input) {
 			name = input;
 		});
 	}
@@ -62,7 +63,7 @@ std::shared_ptr<ClientInfo> Server::init_client_session(Socket client) {
 	while (!done) {
 		try
 		{
-			done = client.readline([&age](std::string input) {
+			done = client.readline([&age](const std::string input) {
 				age = std::stoi(input);
 			});
 		}

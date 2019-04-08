@@ -13,7 +13,7 @@ void CharacterCard::readFromConsole(std::vector<std::string>& data)
 	}
 }
 
-std::string CharacterCard::name()
+std::string CharacterCard::name() const
 {
 	return name_;
 }

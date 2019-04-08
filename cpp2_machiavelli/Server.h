@@ -13,7 +13,7 @@ public:
 	}
 
 	void consume_command();
-	std::shared_ptr<ClientInfo> init_client_session(Socket client);
+	std::shared_ptr<ClientInfo> init_client_session(Socket client) const;
 	void handle_client(Socket client);
 	void init();
 

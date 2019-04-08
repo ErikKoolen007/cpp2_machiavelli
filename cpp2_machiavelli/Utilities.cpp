@@ -2,7 +2,7 @@
 #include <random>
 #include <chrono>
 
-int Utilities::random_number(int min, int max)
+int Utilities::random_number(const int min, const int max)
 {
 	const unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::default_random_engine generator(seed);

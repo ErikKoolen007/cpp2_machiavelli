@@ -9,12 +9,12 @@ class Game
 public:
 	Game();
 
-	GameManager& game_manager() { return *game_manager_; }
-	ClientManager& client_manager() { return *client_manager_; }
-	CharacterManager& character_manager() { return *character_manager_; }
-	StateMachine<Game>& state_machine() { return *state_machine_; }
+	GameManager& game_manager() const { return *game_manager_; }
+	ClientManager& client_manager() const { return *client_manager_; }
+	CharacterManager& character_manager() const { return *character_manager_; }
+	StateMachine<Game>& state_machine() const { return *state_machine_; }
 
-	void handle_command(ClientInfo& client_info, const std::string& command);
+	void handle_command(ClientInfo& client_info, const std::string& command) const;
 	
 private:
 	std::unique_ptr<GameManager> game_manager_;

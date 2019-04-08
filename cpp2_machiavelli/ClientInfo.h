@@ -28,7 +28,7 @@ public:
     Player& get_player() { return _player; }
     const Player& get_player() const { return _player; }
 
-	bool locked() { return _locked; }
+	bool locked() const { return _locked; }
 	void locked(bool locked) { _locked = locked; }
 };
 

@@ -26,7 +26,7 @@ public:
 	void notify_player(std::string message, int player_id);
 	void lock_client(int player_id, bool lock);
 	void lock_all_clients();
-	void trigger_next_state(std::string new_state);
+	void trigger_next_state(std::string new_state) const;
 	void clear_characters_of_players();
 	std::unordered_map<int, int>& get_round_routing_table();
 	void clear_round_routing_table();

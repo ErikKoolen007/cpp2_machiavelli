@@ -7,15 +7,15 @@ void GameRoundState::on_enter(Game& game)
 	std::unordered_map<int, int>& routing_table = game.client_manager().get_round_routing_table();
 	bool done = false;
 
-	character_id = game.game_manager().get_character_order_queue().front();
+	character_id_ = game.game_manager().get_character_order_queue().front();
 
-	if (routing_table.count(character_id))
+	if (routing_table.count(character_id_))
 	{
-		player_id = routing_table.find(character_id)->second;
+		player_id_ = routing_table.find(character_id_)->second;
 
 		//added from here
-		Player& current_player = game.client_manager().get_client(player_id).get_player();
-		std::shared_ptr<CharacterCard>& current_character = current_player.character_card(character_id);
+		Player& current_player = game.client_manager().get_client(player_id_).get_player();
+		std::shared_ptr<CharacterCard>& current_character = current_player.character_card(character_id_);
 
 		//lock all the clients (it is possible that one of them is not locked at this stage
 		game.client_manager().lock_all_clients();
@@ -26,11 +26,11 @@ void GameRoundState::on_enter(Game& game)
 			if (current_character->robbed())
 			{
 				Player& robber = game.client_manager().get_client(current_character->robbed_by()).get_player();
-				int amount = current_player.coins();
+				const int amount = current_player.coins();
 				current_player.coins(0);
 				robber.add_coins(amount);
 				game.client_manager().notify_player("Oi, you got robbed! " +
-					std::to_string(amount) + " (all) of your coins has been transferred to " + robber.get_name() + "\r\n", player_id);
+					std::to_string(amount) + " (all) of your coins has been transferred to " + robber.get_name() + "\r\n", player_id_);
 			}
 
 			//check merchant
@@ -45,10 +45,10 @@ void GameRoundState::on_enter(Game& game)
 				current_player.getInventoryInfo() + "\r\n" +
 				current_player.get_played_buildings_info() + "\r\n\r\n" +
 				"This turn you play for the " + current_character->name() + "\r\n\r\n" +
-				generate_options_msg(current_character), player_id);
+				generate_options_msg(current_character), player_id_);
 
 			//expect player input from here
-			game.client_manager().lock_client(player_id, false);
+			game.client_manager().lock_client(player_id_, false);
 		}
 		else
 		{
@@ -56,13 +56,13 @@ void GameRoundState::on_enter(Game& game)
 			{
 				king_killed_ = true;
 			}
-			game.client_manager().notify_player("Oi boi, you have been assassinated, you are skipping a turn now... \r\n", player_id);
+			game.client_manager().notify_player("Oi boi, you have been assassinated, you are skipping a turn now... \r\n", player_id_);
 			end_turn(game);
 		}
 	}
 	else
 	{
-		game.client_manager().notify_all_players("The King called for the " + game.character_manager().get_name_by_id(character_id)
+		game.client_manager().notify_all_players("The King called for the " + game.character_manager().get_name_by_id(character_id_)
 			+ " but none answered.\r\n");
 
 		end_turn(game);
@@ -71,8 +71,8 @@ void GameRoundState::on_enter(Game& game)
 
 void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std::string& command)
 {
-	Player& current_player = game.client_manager().get_client(player_id).get_player();
-	std::shared_ptr<CharacterCard>& current_character = current_player.character_card(character_id);
+	Player& current_player = game.client_manager().get_client(player_id_).get_player();
+	std::shared_ptr<CharacterCard>& current_character = current_player.character_card(character_id_);
 
 
 	if (command == "build" && !building_)
@@ -88,12 +88,12 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 		});
 
 		game.client_manager().notify_player(std::string("Which building do you want to build? Please type the number of the card \r\n") +
-			option_msg, player_id);
+			option_msg, player_id_);
 	}
 
 	else if (command == "special power" && !building_)
 	{
-		switch (character_id) {
+		switch (character_id_) {
 		case 1:
 			game.client_manager().trigger_next_state("AssassinState");
 			break;
@@ -126,7 +126,7 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 		building_coins_used_ = true;
 		current_player.add_building(game.game_manager().get_top_building_card());
 		game.client_manager().notify_player("\r\n a building card has been added to your inventory, you now have the following building cards in your hand:\r\n " +
-			current_player.get_building_info() + "\r\n\r\n" + generate_options_msg(current_character), player_id);
+			current_player.get_building_info() + "\r\n\r\n" + generate_options_msg(current_character), player_id_);
 	}
 
 	else if (command == "coins" && !building_)
@@ -134,18 +134,18 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 		building_coins_used_ = true;
 		current_player.add_coins(2);
 		game.client_manager().notify_player("\r\n2 coins have been added, You now have " + 
-			std::to_string(current_player.coins()) + " coins \r\n\r\n" + generate_options_msg(current_character), player_id);
+			std::to_string(current_player.coins()) + " coins \r\n\r\n" + generate_options_msg(current_character), player_id_);
 	}
 
 	else if (command == "help" && !building_)
 	{
-		game.client_manager().notify_player(generate_help_msg(), player_id);
+		game.client_manager().notify_player(generate_help_msg(), player_id_);
 	}
 
 	else if (command == "back" && building_)
 	{
 		building_ = false;
-		game.client_manager().notify_player(generate_options_msg(current_character), player_id);
+		game.client_manager().notify_player(generate_options_msg(current_character), player_id_);
 	}
 
 	else if (command == "end" && !building_)
@@ -166,27 +166,27 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 			{
 				game.client_manager().notify_player("Sorry, you cannot build this building, the cost of this building is: " +
 					std::to_string(selected_card.points()) + " and you have only " +
-					std::to_string(current_player.coins()) + " coins. Go back by typing 'back' \r\n", player_id);
+					std::to_string(current_player.coins()) + " coins. Go back by typing 'back' \r\n", player_id_);
 			}
 			else
 			{
 				current_player.transfer_buildings_to_table(selected_card.name());
 				current_player.add_coins(selected_card.points() *-1);
 				game.client_manager().notify_player("Building " + selected_card.name() + "built! \r\n" +
-					current_player.getInventoryInfo() + current_player.get_played_buildings_info(), player_id);
+					current_player.getInventoryInfo() + current_player.get_played_buildings_info(), player_id_);
 				building_ = false;
 				buildings_built_++;
-				game.client_manager().notify_player(generate_options_msg(current_character), player_id);
+				game.client_manager().notify_player(generate_options_msg(current_character), player_id_);
 			}
 		}
 		catch (std::exception& ex)
 		{
-			game.client_manager().notify_player("\r\nYour input is not valid, please try a valid number.\r\n", player_id);
+			game.client_manager().notify_player("\r\nYour input is not valid, please try a valid number.\r\n", player_id_);
 		}
 	}
 	else
 	{
-		game.client_manager().notify_player("unrecognized command, please try again", player_id);
+		game.client_manager().notify_player("unrecognized command, please try again", player_id_);
 	}
 }
 
@@ -199,7 +199,7 @@ std::string GameRoundState::name()
 	return "GameRoundState";
 }
 
-std::string GameRoundState::generate_options_msg(std::shared_ptr<CharacterCard>& current_character)
+std::string GameRoundState::generate_options_msg(std::shared_ptr<CharacterCard>& current_character) const
 {
 	std::string console_msg = "";
 
@@ -270,7 +270,7 @@ void GameRoundState::end_turn(Game& game)
 			{
 				auto& current_king = game.client_manager().get_king();
 				current_king.get_player().king(false);
-				game.client_manager().get_next_client(player_id).get_player().king(true);
+				game.client_manager().get_next_client(player_id_).get_player().king(true);
 			}
 			king_killed_ = false;
 			game.client_manager().trigger_next_state("SetupRoundState");

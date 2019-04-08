@@ -6,7 +6,7 @@
 class Player {
 public:
     Player() = default;
-	Player(std::string name, int age) : name{std::move(name)}, age_{age}
+	Player(std::string name, const int age) : name{std::move(name)}, age_{age}
 	{
 	}
 
@@ -14,22 +14,22 @@ public:
     void set_name(const std::string& new_name) { name = new_name; }
 
 	int id() const { return id_; }
-	void id(int id) { id_ = id; }
+	void id(const int id) { id_ = id; }
 
 	int points() const { return points_; }
-	void add_points(int points) { points_ += points; }
+	void add_points(const int points) { points_ += points; }
 
 	int building_card_points() const { return building_card_points_; }
 	void add_building_card_points(int points) { building_card_points_ += points; }
 
 	int coins() const { return coins_;  }
-	void coins(int coins) { coins_ = coins; }
+	void coins(const int coins) { coins_ = coins; }
 	void add_coins(int amount) { coins_ = coins_ + amount; }
 
 	int age() const { return age_; }
 
 	bool king() const { return king_; }
-	void king(bool king) { king_ = king; }
+	void king(const bool king) { king_ = king; }
 
 	bool first_full_city() const { return first_full_city_; }
 	void build_full_city() { first_full_city_ = true; }
@@ -40,7 +40,7 @@ public:
 
 	std::vector<BuildingCard>& building_cards_on_table() { return buildings_on_table_; }
 	void transfer_buildings_to_table(std::string building_name);
-	void add_building_to_table(BuildingCard building) { buildings_on_table_.push_back(building); }
+	void add_building_to_table(const BuildingCard building) { buildings_on_table_.push_back(building); }
 	void destroy_building(int index);
 
 	std::vector<std::shared_ptr<CharacterCard>>& character_cards() { return characters_; }

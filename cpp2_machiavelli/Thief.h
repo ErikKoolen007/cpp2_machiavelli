@@ -4,7 +4,7 @@
 class Thief : public CharacterCard
 {
 public:
-	Thief(int id, std::string name) : CharacterCard(id, name)
+	Thief(const int id, const std::string name) : CharacterCard(id, name)
 	{
 	}
 };

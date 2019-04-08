@@ -21,7 +21,7 @@ void Player::destroy_building(int index)
 		building_cards_on_table().erase(building_cards_on_table().begin() + index);
 }
 
-void Player::transfer_buildings_to_table(std::string building_name)
+void Player::transfer_buildings_to_table(const std::string building_name)
 {
 	for (auto it = building_cards().begin(); it != building_cards().end(); ++it) {
 		BuildingCard& element = *it;

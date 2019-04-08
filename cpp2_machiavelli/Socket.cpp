@@ -57,7 +57,7 @@
     public:
         WSA()
         {
-            int iResult = WSAStartup(MAKEWORD(2, 2), &data);
+	        const int iResult = WSAStartup(MAKEWORD(2, 2), &data);
             if (iResult != 0) {
                 std::cerr << "WSAStartup failed with error: " << iResult << '\n';
             }
@@ -79,7 +79,7 @@ void throw_unless_would_block() {
         throw std::system_error { errno, std::system_category() };
     }
 #else
-    int err = WSAGetLastError();
+	const int err = WSAGetLastError();
     if (err != WSAEWOULDBLOCK) {
         throw std::system_error { err, std::system_category() };
     }
@@ -126,7 +126,7 @@ Socket& Socket::operator=(Socket&& other)
     return *this;
 }
 
-ssize_t Socket::read(char *buf, size_t maxlen) const
+ssize_t Socket::read(char *buf, const size_t maxlen) const
 {
     ssize_t len = 0;
     // might come in parts
@@ -154,7 +154,7 @@ void Socket::write(const std::string& msg) const
     write(msg.c_str(), msg.length());
 }
 
-void Socket::write(const char *buf, size_t len) const
+void Socket::write(const char *buf, const size_t len) const
 {
     throw_if_min1((int)::send(sock, buf, (int)len, 0));
 }
@@ -234,7 +234,7 @@ ServerSocket::ServerSocket(int port)
     }
 #else
     u_long blocking = 1;
-    int result = ioctlsocket(sock, FIONBIO, &blocking);
+	const int result = ioctlsocket(sock, FIONBIO, &blocking);
     if (result != NO_ERROR) {
         throw std::system_error { WSAGetLastError(), std::system_category() };
     }
@@ -274,7 +274,7 @@ ClientSocket::ClientSocket(const std::string& host, int port)
     hint.ai_family = AF_INET;
     hint.ai_socktype = SOCK_STREAM;
     struct addrinfo* infolist {nullptr};
-    int gai_error = ::getaddrinfo(host.c_str(), std::to_string(port).c_str(), &hint, &infolist);
+	const int gai_error = ::getaddrinfo(host.c_str(), std::to_string(port).c_str(), &hint, &infolist);
     if (gai_error) {
         std::ostringstream oss;
         oss << "getaddrinfo error " << gai_error << ": " << gai_strerror(gai_error) << " (" << __FILE__ << ":" << __LINE__ << ")";
@@ -286,7 +286,7 @@ ClientSocket::ClientSocket(const std::string& host, int port)
     std::unique_ptr<struct addrinfo, cleanup_func> list {infolist, ::freeaddrinfo};
 #else // Windows
     using cleanup_func = void(__stdcall*)(PADDRINFOA);
-    std::unique_ptr<struct addrinfo, cleanup_func> list(infolist, ::freeaddrinfo);
+	const std::unique_ptr<struct addrinfo, cleanup_func> list(infolist, ::freeaddrinfo);
 #endif
     // create socket
     throw_if_min1(sock = ::socket(list->ai_family, list->ai_socktype, list->ai_protocol));

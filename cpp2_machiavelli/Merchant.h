@@ -4,7 +4,7 @@
 class Merchant : public CharacterCard
 {
 public:
-	Merchant(int id, std::string name) : CharacterCard(id, name)
+	Merchant(const int id, const std::string name) : CharacterCard(id, name)
 	{
 	}
 };

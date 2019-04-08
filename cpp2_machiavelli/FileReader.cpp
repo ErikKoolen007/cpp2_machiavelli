@@ -9,7 +9,7 @@
 #include "Builder.h"
 #include "Condottiere.h"
 
-std::deque<BuildingCard> FileReader::load_building_cards()
+std::deque<BuildingCard> FileReader::load_building_cards() const
 {
 	std::deque<BuildingCard> building_cards;
 
@@ -30,7 +30,11 @@ std::deque<BuildingCard> FileReader::load_building_cards()
 	return building_cards;
 }
 
-std::deque<std::unique_ptr<CharacterCard>> FileReader::load_character_cards()
+/**
+ * \brief 
+ * \return 
+ */
+std::deque<std::unique_ptr<CharacterCard>> FileReader::load_character_cards() const
 {
 	std::deque<std::unique_ptr<CharacterCard>> character_cards;
 

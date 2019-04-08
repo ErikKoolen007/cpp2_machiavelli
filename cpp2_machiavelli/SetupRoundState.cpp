@@ -57,7 +57,7 @@ std::string SetupRoundState::name()
 	return "SetupRoundState";
 }
 
-void SetupRoundState::draw_characters(int player_id, Game& game)
+void SetupRoundState::draw_characters(int player_id, Game& game) const
 {
 	if(game.game_manager().character_card_deck_size() > 1)
 	{

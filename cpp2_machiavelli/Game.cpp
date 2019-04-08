@@ -35,7 +35,7 @@ Game::Game()
 	character_manager_ = std::make_unique<CharacterManager>(*client_manager_);
 }
 
-void Game::handle_command(ClientInfo& client_info, const std::string& command)
+void Game::handle_command(ClientInfo& client_info, const std::string& command) const
 {
 	if(client_info.locked())
 	{

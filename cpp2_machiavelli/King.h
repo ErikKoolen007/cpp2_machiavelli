@@ -4,7 +4,7 @@
 class King : public CharacterCard
 {
 public:
-	King(int id, std::string name) : CharacterCard(id, name)
+	King(const int id, const std::string name) : CharacterCard(id, name)
 	{
 	}
 };

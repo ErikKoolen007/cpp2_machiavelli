@@ -32,7 +32,7 @@ std::string PreGameState::name()
 	return "PreGameState";
 }
 
-void PreGameState::add_starting_resources(Game& game)
+void PreGameState::add_starting_resources(Game& game) const
 {
 	game.game_manager().load_building_deque();
 	auto& clients = game.client_manager().get_clients();

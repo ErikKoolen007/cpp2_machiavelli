@@ -4,8 +4,6 @@
 class Preacher : public CharacterCard
 {
 public:
-	Preacher(int id, std::string name) : CharacterCard(id, name)
-	{
-	}
+	Preacher(const int id, std::string name);
 };
 

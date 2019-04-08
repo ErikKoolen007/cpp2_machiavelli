@@ -39,7 +39,7 @@ int GameManager::pop_character_order_queue()
 	{
 		load_character_order_queue();
 	}
-	int character_id = character_order_queue_.front();
+	const int character_id = character_order_queue_.front();
 	character_order_queue_.pop();
 	return character_id;
 }

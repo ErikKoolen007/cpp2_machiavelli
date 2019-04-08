@@ -28,7 +28,7 @@ void __throw_if_min1(int x, const char* file, unsigned int line, const char* mes
         error_code ec {errno, system_category()};
         ostringstream ec_str;
         ec_str << "system error " <<  ec.value() << ": " << ec.message();
-        string msg {combine_message_elements(file, line, message, ec_str.str().c_str())};
+	    const string msg {combine_message_elements(file, line, message, ec_str.str().c_str())};
         throw system_error {ec, msg};
     }
 }
@@ -36,7 +36,7 @@ void __throw_if_min1(int x, const char* file, unsigned int line, const char* mes
 void __throw_if_null(const void* p, const char* file, unsigned int line, const char* message)
 {
     if (p == nullptr) {
-        string msg {combine_message_elements(file, line, message, "null pointer exception")};
+	    const string msg {combine_message_elements(file, line, message, "null pointer exception")};
         throw runtime_error {msg};
     }
 }
@@ -47,7 +47,7 @@ void __throw_if_err(int err, const char* file, unsigned int line, const char* me
         error_code ec {err, system_category()};
         ostringstream ec_str;
         ec_str << "error " <<  err;
-        string msg {combine_message_elements(file, line, message, ec_str.str().c_str())};
+	    const string msg {combine_message_elements(file, line, message, ec_str.str().c_str())};
         throw system_error {ec, msg};
     }
 }

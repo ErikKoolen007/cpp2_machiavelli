@@ -15,7 +15,7 @@ public:
 
 inline std::ostream& operator<<(std::ostream& os, const Card& card)
 {
-	std::string outputString = card.writeToConsole();
+	const std::string outputString = card.writeToConsole();
 	
 	return os << outputString;
 }

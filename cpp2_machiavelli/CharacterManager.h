@@ -9,7 +9,7 @@ public:
 	{
 	}
 
-	std::string get_name_by_id(int char_id);
+	std::string get_name_by_id(int char_id) const;
 	void register_special_ability_used(int player_id, int char_id);
 
 private:

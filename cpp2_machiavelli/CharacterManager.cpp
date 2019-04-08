@@ -1,7 +1,7 @@
 #include "CharacterManager.h"
 #include <algorithm>
 
-std::string CharacterManager::get_name_by_id(int char_id)
+std::string CharacterManager::get_name_by_id(int char_id) const
 {
 	switch (char_id)
 	{

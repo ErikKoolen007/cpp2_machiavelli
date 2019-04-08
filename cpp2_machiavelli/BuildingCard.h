@@ -9,7 +9,7 @@ class BuildingCard :
 {
 public:
 	BuildingCard() = default;
-	BuildingCard(std::string name, int points, std::string color) : name_(std::move(name)), 
+	BuildingCard(std::string name, const int points, std::string color) : name_(std::move(name)), 
 																	points_(points), color_(std::move(color))
 	{
 	}

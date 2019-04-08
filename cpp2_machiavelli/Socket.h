@@ -78,7 +78,7 @@ public:
     template<typename Callback>
     bool readline(Callback callback) const {
         char c;
-        while (ssize_t n = ::recv(sock, &c, 1, 0)) {
+        while (const ssize_t n = ::recv(sock, &c, 1, 0)) {
             if (n == 0) {
                 return false;
             }
