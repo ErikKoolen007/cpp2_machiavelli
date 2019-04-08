@@ -116,7 +116,7 @@ void GameRoundState::handle_input(Game& game, ClientInfo& client_info, const std
 			game.client_manager().trigger_next_state("BuilderState");
 			break;
 		case 8:
-			game.client_manager().trigger_next_state("CondotierreState");
+			game.client_manager().trigger_next_state("CondottiereState");
 			break;
 		default:;
 		}

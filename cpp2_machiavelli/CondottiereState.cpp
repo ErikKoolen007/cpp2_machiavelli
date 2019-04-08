@@ -23,7 +23,7 @@ void CondottiereState::on_enter(Game& game)
 	ClientInfo& other_client = game.client_manager().get_next_client(player.id());
 
 	//If the other client has no buildings, 8 or more buildings or has the preacher card, no buildings can be demolished
-	const int other_table_size = other_client.get_player().building_cards().size();
+	const int other_table_size = other_client.get_player().building_cards_on_table().size();
 	if(other_table_size == 0 || other_table_size > 7 || other_client.get_player().has_character_card(5))
 	{
 		socket.write("Sorry, there are no buildings available to demolish.");
