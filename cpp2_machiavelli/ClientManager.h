@@ -30,6 +30,7 @@ public:
 	void clear_characters_of_players();
 	std::unordered_map<int, int>& get_round_routing_table();
 	void clear_round_routing_table();
+	void reset_players();
 
 private:
 	StateMachine<Game>& state_machine_;
